@@ -1,0 +1,25 @@
+@import './FooterList.scss';
+
+.footer {
+  background-image: url('https://pizzalife.ua/templates/main/wp-content/uploads/2019/03/demo1-0611177699-1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: gray;
+  padding: 50px 0;
+
+  &__block {
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 992px) {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  }
+
+    &__title {
+      font-size: 22px;
+      font-weight: 700;
+    }
+}

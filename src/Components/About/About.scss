@@ -1,0 +1,22 @@
+.about {
+  padding: 50px 0;
+  width: 70%;
+
+  &__title {
+    font-size: 48px;
+    font-weight: 900;
+    text-align: center;
+    margin: 0 0 20px 0;
+  }
+
+  &__block {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__txt {
+    width: 70%;
+    font-size: 16px;
+    line-height: 2;
+  }
+}

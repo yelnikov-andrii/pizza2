@@ -1,0 +1,46 @@
+.header {
+  height: 80px;
+
+  &__cart {
+    position: relative;
+
+  &--count {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: #000;
+    background-color: #ffc107;
+    position: absolute;
+    top: 0px;
+    right: -10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+
+    @media (max-width: 992px) {
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    }
+  }
+
+  &__link {
+
+    &.nav-link {
+      font-size: 16px;
+    }
+  }
+
+  &__nav {
+    &.navbar-nav {
+      padding: 0 10px;
+    }
+  }
+}
+
+.navbar-expand-lg .navbar-nav {
+  flex-direction: row;
+  justify-content: space-between;
+}

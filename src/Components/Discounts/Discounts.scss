@@ -1,0 +1,19 @@
+.discounts {
+  padding: 50px 0;
+
+  &__title {
+    font-size: 48px;
+    font-weight: 900;
+    text-align: center;
+  }
+
+  &__block {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__img {
+    width: 100%;
+    height: auto;
+  }
+}

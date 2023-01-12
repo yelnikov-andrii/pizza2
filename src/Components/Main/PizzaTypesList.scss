@@ -1,0 +1,9 @@
+.list-group {
+  &.pizzaTypes {
+    margin-bottom: 50px;
+    
+    @media (max-width: 575px) {
+      flex-direction: column;
+    }
+  }
+}

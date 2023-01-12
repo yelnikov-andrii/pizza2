@@ -1,0 +1,18 @@
+@import './Vacancy.scss';
+
+.vacancies {
+  padding: 50px 0;
+
+  &__title {
+    font-size: 48px;
+    font-weight: 900;
+    text-align: center;
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+}

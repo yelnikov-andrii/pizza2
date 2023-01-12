@@ -1,0 +1,12 @@
+@import './Pizza.scss';
+@import './Pizzas.scss';
+@import './PizzaTypesList.scss';
+
+.main {
+  padding: 50px 0 80px;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}

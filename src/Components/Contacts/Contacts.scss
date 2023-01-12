@@ -1,0 +1,13 @@
+@import './ContactsBlock.scss';
+@import './ContactsBlockForm.scss';
+
+.contacts {
+  padding: 50px 0;
+
+  &__title {
+    font-size: 48px;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,56 @@
+@import './CartForm.scss';
+
+.cart {
+  &__header {
+    font-size: 48px;
+    text-align: center;
+    margin: 0 0 20px 0;
+  }
+
+  &__photo {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__size {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__souse {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__tablePrice {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__emptyBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  &__img {
+    width: 50px;
+    height: 50px;
+  }
+
+  &__sum {
+    font-weight: 700;
+    font-size: 28px;
+  }
+
+  &__goBack {
+    display: block;
+    margin-top: 20px;
+    font-size: 24px;
+  }
+}
