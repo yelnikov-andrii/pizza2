@@ -112,12 +112,13 @@ export const Pizza: React.FC <any> = ({pizza}) => {
             const copyPizza = JSON.parse(JSON.stringify(pizza));
             copyPizza.selectedSize = selectedSize;
             copyPizza.selectedSouse = copyPizza.souses[selectedSouse];
+            copyPizza.id += selectedSize.toString() + selectedSouse;
             copyPizza.quantity = 1;
             setPizzasInCart((pizzas: any) => [...pizzas, copyPizza]);
             setShow(true);
-            if (pizzasInCart.find((pizza: any) => pizza.id === copyPizza.id && pizza.selectedSize === copyPizza.selectedSize && pizza.selectedSouse === copyPizza.selectedSouse)) {
+            if (pizzasInCart.find((pizza: any) => pizza.id === copyPizza.id)) {
               const copyPizzas = JSON.parse(JSON.stringify(pizzasInCart));
-              const foundPizza = copyPizzas.find((pizza: any) => pizza.id === copyPizza.id && pizza.selectedSize === copyPizza.selectedSize && pizza.selectedSouse === copyPizza.selectedSouse);
+              const foundPizza = copyPizzas.find((pizza: any) => pizza.id === copyPizza.id);
               foundPizza.quantity += 1;
               setPizzasInCart(copyPizzas);
             }

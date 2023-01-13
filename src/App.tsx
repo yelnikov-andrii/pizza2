@@ -24,7 +24,8 @@ function App() {
   const [pizzasInCart, setPizzasInCart] = React.useState<any>([]);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState('');
-  const countOfPizzas = pizzasInCart.reduce((initialValue: any, pizza: any) => initialValue + pizza.quantity, 0);
+  let countOfPizzas = 0;
+    countOfPizzas = pizzasInCart.reduce((initialValue: any, pizza: any) => initialValue + pizza.quantity, 0);
 
   React.useEffect(() => {
     setLoading(true);
@@ -36,6 +37,19 @@ function App() {
       setLoading(false);
     })
   }, []);
+
+  React.useEffect(() => {
+    const pizzasFromStorage = localStorage.getItem('pizzasInCart') ? JSON.parse(localStorage.getItem("pizzasInCart") || '{}') : null;
+    if (pizzasFromStorage) {
+      setPizzasInCart(pizzasFromStorage);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (pizzasInCart.length > 0) {
+      localStorage.setItem('pizzasInCart', JSON.stringify(pizzasInCart))
+    }
+  }, [pizzasInCart])
 
       return (
         <div className="App">
@@ -50,7 +64,7 @@ function App() {
                 path="/"
                 element={<Navigate to="/pizzas" replace />}
               />
-              <Route path='/cart' element={<Cart pizzasInCart={pizzasInCart}/>}>
+              <Route path='/cart' element={<Cart pizzasInCart={pizzasInCart} setPizzasInCart={setPizzasInCart}/>}>
               </Route>
               <Route path='/delivery' element={<Delivery />}>
               </Route>

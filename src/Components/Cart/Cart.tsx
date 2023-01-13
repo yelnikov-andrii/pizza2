@@ -4,7 +4,7 @@ import Table from 'react-bootstrap/Table';
 import { Link } from 'react-router-dom';
 import { CartForm } from './CartForm';
 
-export const Cart: React.FC <any> = ({pizzasInCart}) => {
+export const Cart: React.FC <any> = ({pizzasInCart, setPizzasInCart}) => {
   const sum = pizzasInCart.reduce((initialValue: any, pizza: any) => initialValue + pizza.quantity * pizza.prices[pizza.selectedSize], 0);
   const [filled, setFilled] = React.useState(false);
 
@@ -64,11 +64,12 @@ export const Cart: React.FC <any> = ({pizzasInCart}) => {
           <th>
             Сума
           </th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         {pizzasInCart.map((pizza: any) => (
-          <tr key={pizza.id}>
+          <tr key={pizza.id + pizza.selectedSouse + pizza.selectedSize}>
           <td className='cart__photo'>
             <img 
               src={pizza.img} 
@@ -82,6 +83,15 @@ export const Cart: React.FC <any> = ({pizzasInCart}) => {
           <td className='cart__tablePrice'>{pizza.prices[pizza.selectedSize]}</td>
           <td className='cart__quantity'>{pizza.quantity}</td>
           <td>{pizza.quantity * pizza.prices[pizza.selectedSize]}</td>
+          <td>
+            <button onClick={(e) => {
+              e.preventDefault();
+              const filteredPizzas = pizzasInCart.filter((p: any) => p.id !== pizza.id)
+              setPizzasInCart(filteredPizzas);
+            }}>
+              Видалити
+            </button>
+          </td>
         </tr>
         ))}
       </tbody>

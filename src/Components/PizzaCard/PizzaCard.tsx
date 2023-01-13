@@ -190,15 +190,16 @@ export const PizzaCard = () => {
               const copyPizza = JSON.parse(JSON.stringify(pizza));
               copyPizza.selectedSize = selectedSize;
               copyPizza.selectedSouse = copyPizza.souses[selectedSouse];
+              copyPizza.id += selectedSize.toString() + selectedSouse;
               copyPizza.quantity = quantity || 1;
               if (quantity === 0) {
                 setQuantity(1);
               }
               setPizzasInCart((pizzas: any) => [...pizzas, copyPizza]);
               setShow(true);
-              if (pizzasInCart.find((pizza: any) => pizza.id === copyPizza.id && pizza.selectedSize === copyPizza.selectedSize && pizza.selectedSouse === copyPizza.selectedSouse)) {
+              if (pizzasInCart.find((pizza: any) => pizza.id === copyPizza.id)) {
                 const copyPizzas = JSON.parse(JSON.stringify(pizzasInCart));
-                const foundPizza = copyPizzas.find((pizza: any) => pizza.id === copyPizza.id && pizza.selectedSize === copyPizza.selectedSize && pizza.selectedSouse === copyPizza.selectedSouse);
+                const foundPizza = copyPizzas.find((pizza: any) => pizza.id === copyPizza.id);
                 foundPizza.quantity += quantity || 1;
                 setPizzasInCart(copyPizzas);
             }
