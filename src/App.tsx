@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import './App.scss';
+import { url } from './data';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { Header } from './Components/Header/Header';
 import { Main } from './Components/Main/Main';
@@ -29,7 +30,7 @@ function App() {
 
   React.useEffect(() => {
     setLoading(true);
-    axios.get('https://apipizzas.onrender.com/pizzas').then(res => {
+    axios.get(url).then(res => {
       setPizzas(res.data);
     })
     .catch(e => setError(e.message))
@@ -48,6 +49,8 @@ function App() {
   React.useEffect(() => {
     if (pizzasInCart.length > 0) {
       localStorage.setItem('pizzasInCart', JSON.stringify(pizzasInCart))
+    } else {
+      localStorage.clear()
     }
   }, [pizzasInCart])
 

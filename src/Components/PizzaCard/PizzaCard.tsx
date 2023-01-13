@@ -11,6 +11,7 @@ import { pizzasContext } from '../../App';
 import { Alert } from 'react-bootstrap';
 import { Loader } from './Loader';
 import { Oval } from 'react-loader-spinner';
+import { url } from '../../data';
 
 
 export const PizzaCard = () => {
@@ -32,7 +33,7 @@ export const PizzaCard = () => {
 
   React.useEffect(() => {
     setLoading(true);
-    axios.get(`https://apipizzas.onrender.com/pizzas/${pizzaId}`).then((res: any) => {
+    axios.get(`${url}/${pizzaId}`).then((res: any) => {
       setPizza(res.data)
     }).catch(e => setError(e.message))
     .finally(() => {
