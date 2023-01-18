@@ -15,3 +15,13 @@
     }
   }
 }
+
+@media (max-width: 575px) {
+  .navbar-expand .navbar-nav {
+    &.categories__nav {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+}
+  
+}

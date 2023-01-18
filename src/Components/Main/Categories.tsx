@@ -6,7 +6,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 export const Categories: React.FC <any> = ({arr}) => {
   return (
-    <Navbar variant="dark" className='categories'>
+    <Navbar variant="dark" className='categories' sticky='top'>
       <Container>
         <Nav className="me-auto categories__nav">
           {arr.map((item: any) => (
