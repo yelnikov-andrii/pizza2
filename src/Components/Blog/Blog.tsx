@@ -7,28 +7,32 @@ export const Blog = () => {
 
   return (
     <Routes>
-      <Route path="" element={
+      <Route 
+        path="" 
+        element={
         <section className="blog">
-        <div className="container">
-          <h1 className="blog__title">
-            Блог
-          </h1>
-          <div className="blog__block">
-          {blogArr.map(blog => (
-            <BlogArticle blog={blog} key={blog.article} />
-          ))}
+          <div className="container">
+            <h1 className="blog__title">
+              Блог
+            </h1>
+            <div className="blog__block">
+            {blogArr.map(blog => (
+              <BlogArticle blog={blog} key={blog.article} />
+            ))}
+            </div>
           </div>
-        </div>
-      </section>
-      }>
+        </section>
+        }
+      >
       </Route>
       {blogArr.map(blog => (
         <Route 
           path={blog.link}
           key={blog.name}
           element={
-          <BlogItem blog={blog} />
-        }>
+            <BlogItem blog={blog} />
+          }
+        >
         </Route>
       ))}
     </Routes>

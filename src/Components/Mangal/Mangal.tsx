@@ -24,9 +24,9 @@ export const Mangal: React.FC <any> = () => {
   return (
     <>
       <Container>
-      <h1 className='main__header'>
-        Мангал
-      </h1>
+        <h1 className='main__header'>
+          Мангал
+        </h1>
       </Container>
       {loading ? (
         <Container>
@@ -35,9 +35,12 @@ export const Mangal: React.FC <any> = () => {
       ) : (
           <>
             <Container className='pizzas'>
-            {mangals && mangals.map((mangal: any) => (
-              <MangalItem mangal={mangal} key={mangal.id}/>
-            ))}
+              {mangals && mangals.map((mangal: any) => (
+                <MangalItem 
+                  mangal={mangal} 
+                  key={mangal.id}
+                />
+              ))}
           </Container>
           </>
       )}

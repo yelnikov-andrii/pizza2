@@ -68,92 +68,93 @@ export const MangalCard = () => {
             </Card.Title>
             {mangal.components && (
               <Card.Text>
-              Склад:
-              <br />
-              {mangal.components}
-            </Card.Text>
+                Склад:
+                <br />
+                {mangal.components}
+              </Card.Text>
             )}
-            <Card.Text>
-        </Card.Text>
-        <Card.Text>
-          {mangal.weight > 0 && (
-            <Button 
-            variant="outline-warning" 
-            size="sm"
-            active
-            className="pizza__button"
-          >
-            <strong
-              className="pizza__txtStrong"
-            >
-              {`${mangal.weight} г.`}
+          <Card.Text>
+            {mangal.weight > 0 && (
+              <Button 
+                variant="outline-warning" 
+                size="sm"
+                active
+                className="pizza__button"
+              >
+                <strong
+                  className="pizza__txtStrong"
+                >
+                  {`${mangal.weight} г.`}
+                </strong>
+              </Button>
+            )}
+          </Card.Text>
+          <Card.Text >
+            <strong className='pizzaCard__price'>
+              {`${mangal.price} грн.`}
             </strong>
-          </Button>
-          )}
-        </Card.Text>
-        <Card.Text >
-          <strong className='pizzaCard__price'>
-            {`${mangal.price} грн.`}
-          </strong>
-        </Card.Text>
-        <Card.Text className='pizzaCard__counter'>
-          <button
-            className='pizzaCard__button'
-            onClick={(e) => {
-              e.preventDefault();
-              if (quantity > 0) {
-                setQuantity(prev => prev - 1);
-              }
-            }}
-          >
-            -
-          </button>
-          <input 
-            className='pizzaCard__input'
-            value={quantity}
-            onChange={(e) => {
-              if (isNaN(+e.target.value) || +e.target.value < 0) {
-                return;
-              }
-              setQuantity(+e.target.value);
-            }}
-          />
-          <button 
-            className='pizzaCard__button'
-            onClick={(e) => {
-              e.preventDefault();
-              setQuantity(prev => prev + 1);
-            }}
-          >
-            +
-          </button>
-          <Button 
-            className='pizzaCard__button--toCart' 
-            variant='warning'
-            onClick={(e) => {
-              e.preventDefault();
-              const copyMangal = JSON.parse(JSON.stringify(mangal));
-              copyMangal.quantity = quantity || 1;
-              if (quantity === 0) {
-                setQuantity(1);
-              }
-              setShow(true);
-              if (productsInCart.some((product: any) => product.id === copyMangal.id)) {
-                const obj: any = {quantity, id: copyMangal.id};
-                dispatch(incrementWithValue(obj))
-              } else {
-                  dispatch(addProduct(copyMangal));
+          </Card.Text>
+          <Card.Text className='pizzaCard__counter'>
+            <button
+              className='pizzaCard__button'
+              onClick={(e) => {
+                e.preventDefault();
+                if (quantity > 0) {
+                  setQuantity(prev => prev - 1);
                 }
-            }}
-          >
-            <strong>
-              До кошику
-            </strong>
-          </Button>
-        </Card.Text>
-        <Alert className='pizza__alert' show={show}>
-          Страва додана до кошику
-        </Alert>
+              }}
+            >
+              -
+            </button>
+            <input 
+              className='pizzaCard__input'
+              value={quantity}
+              onChange={(e) => {
+                if (isNaN(+e.target.value) || +e.target.value < 0) {
+                  return;
+                }
+                setQuantity(+e.target.value);
+              }}
+            />
+            <button 
+              className='pizzaCard__button'
+              onClick={(e) => {
+                e.preventDefault();
+                setQuantity(prev => prev + 1);
+              }}
+            >
+              +
+            </button>
+            <Button 
+              className='pizzaCard__button--toCart' 
+              variant='warning'
+              onClick={(e) => {
+                e.preventDefault();
+                const copyMangal = JSON.parse(JSON.stringify(mangal));
+                copyMangal.quantity = quantity || 1;
+                if (quantity === 0) {
+                  setQuantity(1);
+                }
+                setShow(true);
+                if (productsInCart.some((product: any) => product.id === copyMangal.id)) {
+                  const obj: any = {quantity, id: copyMangal.id};
+                  dispatch(incrementWithValue(obj))
+                } else {
+                    dispatch(addProduct(copyMangal));
+                  }
+              }}
+            >
+              <strong>
+                До кошику
+              </strong>
+            </Button>
+          </Card.Text>
+              <Alert 
+                className='pizza__alert' 
+                show={show}
+              >
+                Страва додана до кошику
+              </Alert>
             </Card.Body>
           </Card>
         )}

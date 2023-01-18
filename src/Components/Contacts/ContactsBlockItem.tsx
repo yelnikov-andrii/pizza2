@@ -1,6 +1,11 @@
+import { Contact } from '../../types/types';
 import {ContactsList} from './ContactsList';
 
-export const ContactsBlockItem: React.FC <any> = ({contact}) => {
+interface Props {
+  contact: Contact;
+}
+
+export const ContactsBlockItem: React.FC <Props> = ({contact}) => {
   return (
     <div className="contactsBlockItem">
       <img 

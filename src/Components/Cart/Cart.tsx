@@ -22,30 +22,35 @@ export const Cart: React.FC <any> = () => {
   if (productsInCart.length === 0) {
     return (
       <Container className='cart'>
-      <h1 className='cart__header'>
-        Ваш кошик порожній
-      </h1>
-      <div className='cart__emptyBox'>
-      <img 
-        src="https://pizzalife.ua/templates/main/wp-content/uploads/2019/04/demo1-0939697612-1.jpg"
-        alt=""
-      />
-      <Link 
-        to="/"
-        className="cart__goBack"
-      >
-        На головну
-      </Link>
-      </div>
-    </Container>
+        <h1 className='cart__header'>
+          Ваш кошик порожній
+        </h1>
+        <div className='cart__emptyBox'>
+          <img 
+            src="https://pizzalife.ua/templates/main/wp-content/uploads/2019/04/demo1-0939697612-1.jpg"
+            alt=""
+          />
+          <Link 
+            to="/"
+            className="cart__goBack"
+          >
+            На головну
+          </Link>
+        </div>
+      </Container>
     )
-  }
+  };
+
   return (
     <Container className='cart'>
       <h1 className='cart__header'>
         Оформлення замовлення
       </h1>
-      <Table striped bordered hover>
+      <Table 
+        striped 
+        bordered 
+        hover
+      >
       <thead>
         <tr>
           <th className='cart__photo'>
@@ -69,12 +74,13 @@ export const Cart: React.FC <any> = () => {
           <th>
             Сума
           </th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
         {productsInCart.map((product: any) => (
-          <tr key={product.id + product.selectedSouse + product.selectedSize}>
+          <tr 
+            key={product.id + product.selectedSouse + product.selectedSize}
+          >
           <td className='cart__photo'>
             <img 
               src={product.img} 
@@ -82,7 +88,9 @@ export const Cart: React.FC <any> = () => {
               className='cart__img'
             />
           </td>
-          <td>{product.name}</td>
+          <td>
+            {product.name}
+          </td>
           <td className='cart__size'>
             {!product.hasOwnProperty('selectedSize') ? '-' : product.selectedSize === 0 ? '32 см' : '42 см'}
           </td>
@@ -116,7 +124,8 @@ export const Cart: React.FC <any> = () => {
     {filled === false ? <CartForm setFilled={setFilled} /> : 
       <div>
         <h3>Дякуємо за замовлення</h3>
-      </div>}
+      </div>
+    }
     </Container>
   );
 };

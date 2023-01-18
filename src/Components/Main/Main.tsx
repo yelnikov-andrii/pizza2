@@ -12,7 +12,7 @@ import { Snack } from '../Snacks/Snack';
 import { Soupe } from '../Soupes/Soupe';
 import { MangalItem } from '../Mangal/MangalItem';
 
-export const Main: React.FC<any> = () => {
+export const Main = () => {
   const [pizzas, pizzasLoading, pizzasError]: any = useGetThreeProducts(url + '/pizzas/?count=3');
   const [sushi, sushiLoading, sushiError]: any = useGetThreeProducts(url + '/sushi/?count=3');
   const [shaurma, shaurmaLoading, shaurmaError]: any = useGetThreeProducts(url + '/shaurma/?count=3');
@@ -22,78 +22,102 @@ export const Main: React.FC<any> = () => {
   const [soupes, soupesLoading, soupesError]: any = useGetThreeProducts(url + '/soupes/?count=3');
 
   return (
-    <Container className='main' fluid>
-        <Categories arr={categoriesArr} />
-        <MainProduct 
-          categoryName="Піца" 
-          categoryLink="pizzas" 
-          loading={pizzasLoading} 
-          error={pizzasError}
-        >
-          {pizzas.map((pizza: any) => (
-            <Pizza pizza={pizza} key={pizza.id}/>
-          ))}
-        </MainProduct>
-        <MainProduct 
-          categoryName="Суші" 
-          categoryLink="sushi"
-          loading={sushiLoading} 
-          error={sushiError}
-        >
+    <Container 
+      className='main' 
+      fluid
+    >
+      <Categories arr={categoriesArr} />
+      <MainProduct 
+        categoryName="Піца" 
+        categoryLink="pizzas" 
+        loading={pizzasLoading} 
+        error={pizzasError}
+      >
+        {pizzas.map((pizza: any) => (
+          <Pizza 
+            pizza={pizza} 
+            key={pizza.id}
+          />
+        ))}
+      </MainProduct>
+      <MainProduct 
+        categoryName="Суші" 
+        categoryLink="sushi"
+        loading={sushiLoading} 
+        error={sushiError}
+      >
         {sushi.map((sushiItem: any) => (
-            <SushiItem sushiItem={sushiItem} key={sushiItem.id}/>
-          ))}
-        </MainProduct>
-        <MainProduct 
-          categoryName="Шаурма" 
-          categoryLink="shaurma"
-          loading={shaurmaLoading} 
-          error={shaurmaError}
-        >
-          {shaurma.map((shaurmaItem: any) => (
-            <Shaurma shaurma={shaurmaItem} key={shaurmaItem.id} />
-          ))}
-        </MainProduct>
-        <MainProduct 
-          categoryName="Салати" 
-          categoryLink="salads"
-          loading={saladsLoading} 
-          error={saladsError}
-        >
-          {salads.map((salad: any) => (
-            <Salad salad={salad} key={salad.id} />
-          ))}
-        </MainProduct>
-        <MainProduct 
-          categoryName="Мангал" 
-          categoryLink="mangal"
-          loading={mangalLoading} 
-          error={mangalError}
-        >
-          {mangal.map((mangalItem: any) => (
-            <MangalItem mangal={mangalItem} key={mangalItem.id} />
-          ))}
-        </MainProduct>
-        <MainProduct 
-          categoryName="Закуски" 
-          categoryLink="snacks"
-          loading={snacksLoading} 
-          error={snacksError}
-        >
-          {snacks.map((snack: any) => (
-            <Snack snack={snack} key={snack.id} />
-          ))}
-        </MainProduct>
-        <MainProduct 
-          categoryName="Супи" 
-          categoryLink="soupes"
-          loading={soupesLoading} 
-          error={soupesError}
-        >
-          {soupes.map((soupe: any) => (
-            <Soupe soupe={soupe} key={soupe.id} />
-          ))}
-        </MainProduct>
+          <SushiItem 
+            sushiItem={sushiItem} 
+            key={sushiItem.id}
+          />
+        ))}
+      </MainProduct>
+      <MainProduct 
+        categoryName="Шаурма" 
+        categoryLink="shaurma"
+        loading={shaurmaLoading} 
+        error={shaurmaError}
+      >
+        {shaurma.map((shaurmaItem: any) => (
+          <Shaurma 
+            shaurma={shaurmaItem} 
+            key={shaurmaItem.id} 
+          />
+        ))}
+      </MainProduct>
+      <MainProduct 
+        categoryName="Салати" 
+        categoryLink="salads"
+        loading={saladsLoading} 
+        error={saladsError}
+      >
+        {salads.map((salad: any) => (
+          <Salad 
+            salad={salad} 
+            key={salad.id} 
+          />
+        ))}
+      </MainProduct>
+      <MainProduct 
+        categoryName="Мангал" 
+        categoryLink="mangal"
+        loading={mangalLoading} 
+        error={mangalError}
+      >
+        {mangal.map((mangalItem: any) => (
+          <MangalItem 
+            mangal={mangalItem} 
+            key={mangalItem.id} 
+          />
+        ))}
+      </MainProduct>
+      <MainProduct 
+        categoryName="Закуски" 
+        categoryLink="snacks"
+        loading={snacksLoading} 
+        error={snacksError}
+      >
+        {snacks.map((snack: any) => (
+          <Snack 
+            snack={snack} 
+            key={snack.id} 
+          />
+        ))}
+      </MainProduct>
+      <MainProduct 
+        categoryName="Супи" 
+        categoryLink="soupes"
+        loading={soupesLoading} 
+        error={soupesError}
+      >
+        {soupes.map((soupe: any) => (
+          <Soupe 
+            soupe={soupe} 
+            key={soupe.id} 
+          />
+        ))}
+      </MainProduct>
     </Container>
   );
 };

@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Blog } from "../../types/types";
 
-export const BlogArticle: React.FC <any> = ({blog}) => {
+interface Props {
+  blog: Blog;
+}
+
+export const BlogArticle: React.FC <Props> = ({blog}) => {
   return (
     <div className="blogArticle" key={blog.name}>
       <img src={blog.img} alt="" className="blogArticle__img"/>

@@ -22,14 +22,14 @@ export const MainProduct: React.FC <any> = ({categoryName, categoryLink, loading
           </Container>
         ) :  (
           <>
-          <LinkContainer to={categoryLink}>
-        <h2 className='main__header'>
-          {categoryName}
-        </h2>
-        </LinkContainer>
-        <Container className='pizzas'>
-          {children}
-        </Container>
+            <LinkContainer to={categoryLink}>
+              <h2 className='main__header'>
+                {categoryName}
+              </h2>
+            </LinkContainer>
+            <Container className='pizzas'>
+              {children}
+            </Container>
           </>
         )}
         </Container>

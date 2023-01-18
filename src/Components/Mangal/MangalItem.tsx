@@ -22,7 +22,11 @@ export const MangalItem: React.FC <any> = ({mangal}) => {
   return (
     <Card className="pizza">
       <LinkContainer to={mangal.id}>
-        <Card.Img variant="top" src={mangal.img} className="pizza__img" />
+        <Card.Img 
+          variant="top" 
+          src={mangal.img} 
+          className="pizza__img" 
+        />
       </LinkContainer>
       <Card.Body>
         <LinkContainer to={mangal.id}>
@@ -38,17 +42,17 @@ export const MangalItem: React.FC <any> = ({mangal}) => {
         <Card.Text>
           {mangal.weight > 0 && (
             <Button 
-            variant="outline-warning" 
-            size="sm"
-            active
-            className="pizza__button"
-          >
-            <strong
-              className="pizza__txtStrong"
+              variant="outline-warning" 
+              size="sm"
+              active
+              className="pizza__button"
             >
-              {`${mangal.weight} г.`}
-            </strong>
-          </Button>
+              <strong
+                className="pizza__txtStrong"
+              >
+                {`${mangal.weight} г.`}
+              </strong>
+            </Button>
           )}
         </Card.Text>
         <Card.Text >
@@ -74,7 +78,10 @@ export const MangalItem: React.FC <any> = ({mangal}) => {
         >
           До кошику
         </Button>
-        <Alert className='pizza__alert' show={show}>
+        <Alert 
+          className='pizza__alert' 
+          show={show}
+        >
           Страва додана до кошику
         </Alert>
       </Card.Body>

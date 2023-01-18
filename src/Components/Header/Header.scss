@@ -38,6 +38,10 @@
       padding: 0 10px;
     }
   }
+
+  &__dropdown {
+    z-index: 1021;
+  }
 }
 
 .navbar-expand-lg .navbar-nav {
