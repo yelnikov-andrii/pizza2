@@ -37,6 +37,7 @@ export const Main = () => {
           <Pizza 
             pizza={pizza} 
             key={pizza.id}
+            link={`/pizzas/${pizza.id}`}
           />
         ))}
       </MainProduct>
@@ -50,6 +51,7 @@ export const Main = () => {
           <SushiItem 
             sushiItem={sushiItem} 
             key={sushiItem.id}
+            link={`/sushi/${sushiItem.id}`}
           />
         ))}
       </MainProduct>
@@ -62,7 +64,8 @@ export const Main = () => {
         {shaurma.map((shaurmaItem: any) => (
           <Shaurma 
             shaurma={shaurmaItem} 
-            key={shaurmaItem.id} 
+            key={shaurmaItem.id}
+            link={`/shaurma/${shaurmaItem.id}`}
           />
         ))}
       </MainProduct>
@@ -75,7 +78,8 @@ export const Main = () => {
         {salads.map((salad: any) => (
           <Salad 
             salad={salad} 
-            key={salad.id} 
+            key={salad.id}
+            link={`/salads/${salad.id}`}
           />
         ))}
       </MainProduct>
@@ -89,6 +93,7 @@ export const Main = () => {
           <MangalItem 
             mangal={mangalItem} 
             key={mangalItem.id} 
+            link={`/mangal/${mangalItem.id}`}
           />
         ))}
       </MainProduct>
@@ -102,6 +107,7 @@ export const Main = () => {
           <Snack 
             snack={snack} 
             key={snack.id} 
+            link={`/snacks/${snack.id}`}
           />
         ))}
       </MainProduct>
@@ -115,6 +121,7 @@ export const Main = () => {
           <Soupe 
             soupe={soupe} 
             key={soupe.id} 
+            link={`/soupes/${soupe.id}`}
           />
         ))}
       </MainProduct>

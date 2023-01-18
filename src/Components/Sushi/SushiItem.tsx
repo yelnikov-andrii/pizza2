@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addProduct, increment } from '../../redux/productsSlice';
 
-export const SushiItem: React.FC <any> = ({sushiItem}) => {
+export const SushiItem: React.FC <any> = ({sushiItem, link}) => {
   const [show, setShow] = React.useState(false);
   const productsInCart = useSelector((state: any) => state.product.products);
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ export const SushiItem: React.FC <any> = ({sushiItem}) => {
 
   return (
     <Card className="pizza">
-      <LinkContainer to={sushiItem.id}>
+      <LinkContainer to={link || sushiItem.id}>
         <Card.Img variant="top" src={sushiItem.img} className="pizza__img" />
       </LinkContainer>
       <Card.Body>

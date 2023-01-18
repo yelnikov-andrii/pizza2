@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { addProduct, increment } from '../../redux/productsSlice';
 import { useSelector } from 'react-redux';
 
-export const Pizza: React.FC <any> = ({pizza}) => {
+export const Pizza: React.FC <any> = ({pizza, link}) => {
   const [selectedSize, setSelectedSize] = React.useState(0);
   const [selectedSouse, setSelectedSouse] = React.useState(0);
   const productsInCart = useSelector((state: any) => state.product.products);
@@ -24,11 +24,11 @@ export const Pizza: React.FC <any> = ({pizza}) => {
 
   return (
     <Card className="pizza">
-      <LinkContainer to={pizza.id}>
+      <LinkContainer to={link || pizza.id}>
         <Card.Img variant="top" src={pizza.img} className="pizza__img" />
       </LinkContainer>
       <Card.Body>
-        <LinkContainer to={pizza.id}>
+        <LinkContainer to={link || pizza.id}>
           <Card.Title className='pizza__name'>
             {pizza.name}
           </Card.Title>
