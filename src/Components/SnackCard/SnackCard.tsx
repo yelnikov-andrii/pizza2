@@ -6,7 +6,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import classnames from 'classnames';
 import { Alert } from 'react-bootstrap';
 import { LoadingCard } from '../UI/LoadingCard/LoadingCard';
 import { url } from '../../data';
@@ -16,11 +15,9 @@ import { useDispatch } from 'react-redux';
 import { addProduct, incrementWithValue } from '../../redux/productsSlice';
 
 
-export const PizzaCard = () => {
-  const { pizzaId } = useParams();
-  const [pizza, loading, error]: any = useRequest(getPizza);
-  const [selectedSize, setSelectedSize] = React.useState(0);
-  const [selectedSouse, setSelectedSouse] = React.useState(0);
+export const SnackCard = () => {
+  const { snackId } = useParams();
+  const [snack, loading, error]: any = useRequest(getSnack);
   const [quantity, setQuantity] = React.useState(1);
   const productsInCart = useSelector((state: any) => state.product.products);
   const [show, setShow] = React.useState(false);
@@ -32,14 +29,14 @@ export const PizzaCard = () => {
     }, 2000);
   }, [show]);
 
-  function getPizza() {
-    return axios.get(`${url}/pizzas/${pizzaId}`)
+  function getSnack() {
+    return axios.get(`${url}/snacks/${snackId}`)
   }
 
   if (error) {
     return (
       <Container className='pizzaCard'>
-        <h1>Error: we can not load pizza because {error}</h1>
+        <h1>Error: we can not load snack because {error}</h1>
       </Container>
     )
   }
@@ -55,100 +52,56 @@ export const PizzaCard = () => {
       <Row>
         <Col md={6}>
           <img 
-            src={pizza && pizza.img} 
+            src={snack && snack.img} 
             alt="" 
             className='pizzaCard__img'
           />
         </Col>
         <Col md={{ span: 5, offset: 1 }}>
-        {pizza && (
+        {snack && (
           <Card>
             <Card.Body>
             <Card.Title>
             <h1>
-              {pizza.name}
+              {snack.name}
             </h1>
             </Card.Title>
             <Card.Text>
               Склад:
               <br />
-              {pizza.components}
+              {snack.components}
             </Card.Text>
             <Card.Text>
-          <Button 
+          {snack.weight > 0 && (
+            <Button 
             variant="outline-warning" 
             size="lg"
-            active={selectedSize === 0 ? true : false}
+            active
             className="pizza__button"
-            onClick={(e) => {
-              e.preventDefault();
-              setSelectedSize(0)
-            }}
           >
             <strong
               className="pizza__txtStrong"
             >
-              32 см
+              {`${snack.weight} г.`}
             </strong>
-            <span className='pizza__txt'>
-              {`(${pizza.sizes[0]} г.)`}
-            </span>
           </Button>
-          <Button 
+          )}
+          {snack.count > 0 && (
+            <Button 
             variant="outline-warning" 
             size="lg"
             className='pizza__button'
-            active={selectedSize === 1 ? true : false}
-            onClick={(e) => {
-              e.preventDefault();
-              setSelectedSize(1)
-            }}
+            active
           >
           <strong className='pizza__txtStrong'>
-            42 см
+            {`${snack.count} шт.`}
           </strong>
-            <span className='pizza__txt'>
-              {`(${pizza.sizes[1]} г.)`}
-            </span>
           </Button>
-        </Card.Text>
-        <Card.Text>
-          <Button
-            variant="outline-warning"
-            size="lg"
-            active={selectedSouse === 0 ? true : false}
-            className={classnames('pizza__button', {
-              "pizza__button--hidden": pizza.souses.length === 0
-            })}
-            onClick={(e) => {
-              e.preventDefault();
-              setSelectedSouse(0);
-            }}
-          >
-            <strong className='pizza__txtStrong'>
-              {pizza.souses[0]}
-            </strong>
-          </Button>
-          {pizza.souses.length === 2 && (
-            <Button 
-              variant="outline-warning" 
-              size="lg" 
-              className='pizza__button' 
-              onClick={(e) => {
-                e.preventDefault();
-                setSelectedSouse(1);
-              }}
-              active={selectedSouse === 1 ? true : false}
-            >
-            <strong className='pizza__txtStrong'>
-              {pizza.souses[1]}
-            </strong>
-            </Button>
           )}
         </Card.Text>
         <Card.Text >
           <strong className='pizzaCard__price'>
-            {`${pizza.prices[selectedSize]} грн.`}
+            {`${snack.price} грн.`}
           </strong>
         </Card.Text>
         <Card.Text className='pizzaCard__counter'>
@@ -187,20 +140,17 @@ export const PizzaCard = () => {
             variant='warning'
             onClick={(e) => {
               e.preventDefault();
-              const copyPizza = JSON.parse(JSON.stringify(pizza));
-              copyPizza.selectedSize = selectedSize;
-              copyPizza.selectedSouse = copyPizza.souses[selectedSouse];
-              copyPizza.id += selectedSize.toString() + selectedSouse;
-              copyPizza.quantity = quantity || 1;
+              const copySnack = JSON.parse(JSON.stringify(snack));
+              copySnack.quantity = quantity || 1;
               if (quantity === 0) {
                 setQuantity(1);
               }
               setShow(true);
-              if (productsInCart.some((pizza: any) => pizza.id === copyPizza.id)) {
-                const obj: any = {quantity, id: copyPizza.id};
+              if (productsInCart.some((snack: any) => snack.id === copySnack.id)) {
+                const obj: any = {quantity, id: copySnack.id};
                 dispatch(incrementWithValue(obj))
               } else {
-                  dispatch(addProduct(copyPizza));
+                  dispatch(addProduct(copySnack));
                 }
             }}
           >
@@ -210,7 +160,7 @@ export const PizzaCard = () => {
           </Button>
         </Card.Text>
         <Alert className='pizza__alert' show={show}>
-          Піца додана до кошику
+          Закуска додана до кошику
         </Alert>
             </Card.Body>
           </Card>

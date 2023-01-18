@@ -1,17 +1,20 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { CardComponents } from './CardComponents';
+import { CardComponents } from '../UI/CardComponents/CardComponents';
 import classnames from 'classnames';
 import { LinkContainer } from 'react-router-bootstrap';
-import { pizzasContext } from '../../App';
 import { Alert } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { addProduct, increment } from '../../redux/productsSlice';
+import { useSelector } from 'react-redux';
 
 export const Pizza: React.FC <any> = ({pizza}) => {
   const [selectedSize, setSelectedSize] = React.useState(0);
   const [selectedSouse, setSelectedSouse] = React.useState(0);
-  const {setPizzasInCart, pizzasInCart} = React.useContext<any>(pizzasContext);
+  const productsInCart = useSelector((state: any) => state.product.products);
   const [show, setShow] = React.useState(false);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -26,7 +29,9 @@ export const Pizza: React.FC <any> = ({pizza}) => {
       </LinkContainer>
       <Card.Body>
         <LinkContainer to={pizza.id}>
-        <Card.Title className='pizza__name'>{pizza.name}</Card.Title>
+          <Card.Title className='pizza__name'>
+            {pizza.name}
+          </Card.Title>
         </LinkContainer>
         <Card.Subtitle>
         <CardComponents components={pizza.components} />
@@ -95,7 +100,9 @@ export const Pizza: React.FC <any> = ({pizza}) => {
               }}
               active={selectedSouse === 1 ? true : false}
             >
-            <strong className='pizza__txtStrong'> {pizza.souses[1]}</strong>
+            <strong className='pizza__txtStrong'>
+              {pizza.souses[1]}
+            </strong>
             </Button>
           )}
         </Card.Text>
@@ -114,13 +121,12 @@ export const Pizza: React.FC <any> = ({pizza}) => {
             copyPizza.selectedSouse = copyPizza.souses[selectedSouse];
             copyPizza.id += selectedSize.toString() + selectedSouse;
             copyPizza.quantity = 1;
-            setPizzasInCart((pizzas: any) => [...pizzas, copyPizza]);
+
             setShow(true);
-            if (pizzasInCart.find((pizza: any) => pizza.id === copyPizza.id)) {
-              const copyPizzas = JSON.parse(JSON.stringify(pizzasInCart));
-              const foundPizza = copyPizzas.find((pizza: any) => pizza.id === copyPizza.id);
-              foundPizza.quantity += 1;
-              setPizzasInCart(copyPizzas);
+            if (productsInCart.some((pizza: any) => pizza.id === copyPizza.id)) {
+              dispatch(increment(copyPizza.id));
+            } else {
+              dispatch(addProduct(copyPizza));
             }
           }}
         >

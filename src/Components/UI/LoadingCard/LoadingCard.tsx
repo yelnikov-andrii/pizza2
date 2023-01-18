@@ -1,9 +1,26 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
+import { Oval } from  'react-loader-spinner';
 
-export const Loader = () => {
+export const LoadingCard = () => {
   return (
     <div>
+    <h1>
+      Loading...
+    </h1>
+    <Oval
+        height={40}
+        width={40}
+        color="#4fa94d"
+        wrapperStyle={{}}
+        wrapperClass="pizzas__oval"
+        visible={true}
+        ariaLabel='oval-loading'
+        secondaryColor="#4fa94d"
+        strokeWidth={2}
+        strokeWidthSecondary={2}
+      />
+      <div className="pizzas__block">
         <ContentLoader 
           speed={2}
           width={1400}
@@ -20,7 +37,8 @@ export const Loader = () => {
           <rect x="700" y="420" rx="0" ry="0" width="200" height="57" /> 
           <rect x="950" y="420" rx="0" ry="0" width="200" height="57" />
         </ContentLoader>
-    </div>
+      </div>
+  </div>
   );
 };
 

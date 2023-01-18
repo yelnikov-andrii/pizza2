@@ -1,12 +1,17 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { removeProduct } from '../../redux/productsSlice';
 import { CartForm } from './CartForm';
 
-export const Cart: React.FC <any> = ({pizzasInCart, setPizzasInCart}) => {
-  const sum = pizzasInCart.reduce((initialValue: any, pizza: any) => initialValue + pizza.quantity * pizza.prices[pizza.selectedSize], 0);
+export const Cart: React.FC <any> = () => {
+  const productsInCart = useSelector((state: any) => state.product.products);
+  const sum = productsInCart.reduce((initialValue: any, product: any) => initialValue + ((product.prices && product.quantity * product.prices[product.selectedSize]) || product.quantity * product.price), 0)
   const [filled, setFilled] = React.useState(false);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -14,7 +19,7 @@ export const Cart: React.FC <any> = ({pizzasInCart, setPizzasInCart}) => {
     }, 3000);
   }, [filled]);
 
-  if (pizzasInCart.length === 0) {
+  if (productsInCart.length === 0) {
     return (
       <Container className='cart'>
       <h1 className='cart__header'>
@@ -68,26 +73,35 @@ export const Cart: React.FC <any> = ({pizzasInCart, setPizzasInCart}) => {
         </tr>
       </thead>
       <tbody>
-        {pizzasInCart.map((pizza: any) => (
-          <tr key={pizza.id + pizza.selectedSouse + pizza.selectedSize}>
+        {productsInCart.map((product: any) => (
+          <tr key={product.id + product.selectedSouse + product.selectedSize}>
           <td className='cart__photo'>
             <img 
-              src={pizza.img} 
+              src={product.img} 
               alt="" 
               className='cart__img'
             />
           </td>
-          <td>{pizza.name}</td>
-          <td className='cart__size'>{pizza.selectedSize === 0 ? '32 см' : '42 см'}</td>
-          <td className='cart__souse'>{pizza.selectedSouse}</td>
-          <td className='cart__tablePrice'>{pizza.prices[pizza.selectedSize]}</td>
-          <td className='cart__quantity'>{pizza.quantity}</td>
-          <td>{pizza.quantity * pizza.prices[pizza.selectedSize]}</td>
+          <td>{product.name}</td>
+          <td className='cart__size'>
+            {!product.hasOwnProperty('selectedSize') ? '-' : product.selectedSize === 0 ? '32 см' : '42 см'}
+          </td>
+          <td className='cart__souse'>
+            {product.selectedSouse || '-'}
+          </td>
+          <td className='cart__tablePrice'>
+            {(product.prices && product.prices[product.selectedSize]) || product.price}
+          </td>
+          <td className='cart__quantity'>
+            {product.quantity}
+          </td>
+          <td>
+            {(product.prices && product.quantity * product.prices[product.selectedSize]) || product.price}
+          </td>
           <td>
             <button onClick={(e) => {
               e.preventDefault();
-              const filteredPizzas = pizzasInCart.filter((p: any) => p.id !== pizza.id)
-              setPizzasInCart(filteredPizzas);
+              dispatch(removeProduct(product.id));
             }}>
               Видалити
             </button>

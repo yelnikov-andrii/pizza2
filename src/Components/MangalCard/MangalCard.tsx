@@ -6,21 +6,18 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import classnames from 'classnames';
 import { Alert } from 'react-bootstrap';
-import { LoadingCard } from '../UI/LoadingCard/LoadingCard';
 import { url } from '../../data';
 import { useRequest } from '../../hooks/useRequest';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addProduct, incrementWithValue } from '../../redux/productsSlice';
+import { LoadingCard } from '../UI/LoadingCard/LoadingCard';
 
 
-export const PizzaCard = () => {
-  const { pizzaId } = useParams();
-  const [pizza, loading, error]: any = useRequest(getPizza);
-  const [selectedSize, setSelectedSize] = React.useState(0);
-  const [selectedSouse, setSelectedSouse] = React.useState(0);
+export const MangalCard = () => {
+  const { mangalId } = useParams();
+  const [mangal, loading, error]: any = useRequest(getMangal);
   const [quantity, setQuantity] = React.useState(1);
   const productsInCart = useSelector((state: any) => state.product.products);
   const [show, setShow] = React.useState(false);
@@ -32,14 +29,14 @@ export const PizzaCard = () => {
     }, 2000);
   }, [show]);
 
-  function getPizza() {
-    return axios.get(`${url}/pizzas/${pizzaId}`)
+  function getMangal() {
+    return axios.get(`${url}/mangal/${mangalId}`)
   }
 
   if (error) {
     return (
       <Container className='pizzaCard'>
-        <h1>Error: we can not load pizza because {error}</h1>
+        <h1>Error: we can not load mangal because {error}</h1>
       </Container>
     )
   }
@@ -55,100 +52,48 @@ export const PizzaCard = () => {
       <Row>
         <Col md={6}>
           <img 
-            src={pizza && pizza.img} 
+            src={mangal && mangal.img} 
             alt="" 
             className='pizzaCard__img'
           />
         </Col>
         <Col md={{ span: 5, offset: 1 }}>
-        {pizza && (
+        {mangal && (
           <Card>
             <Card.Body>
             <Card.Title>
             <h1>
-              {pizza.name}
+              {mangal.name}
             </h1>
             </Card.Title>
-            <Card.Text>
+            {mangal.components && (
+              <Card.Text>
               Склад:
               <br />
-              {pizza.components}
+              {mangal.components}
             </Card.Text>
+            )}
             <Card.Text>
-          <Button 
+        </Card.Text>
+        <Card.Text>
+          {mangal.weight > 0 && (
+            <Button 
             variant="outline-warning" 
-            size="lg"
-            active={selectedSize === 0 ? true : false}
+            size="sm"
+            active
             className="pizza__button"
-            onClick={(e) => {
-              e.preventDefault();
-              setSelectedSize(0)
-            }}
           >
             <strong
               className="pizza__txtStrong"
             >
-              32 см
-            </strong>
-            <span className='pizza__txt'>
-              {`(${pizza.sizes[0]} г.)`}
-            </span>
-          </Button>
-          <Button 
-            variant="outline-warning" 
-            size="lg"
-            className='pizza__button'
-            active={selectedSize === 1 ? true : false}
-            onClick={(e) => {
-              e.preventDefault();
-              setSelectedSize(1)
-            }}
-          >
-          <strong className='pizza__txtStrong'>
-            42 см
-          </strong>
-            <span className='pizza__txt'>
-              {`(${pizza.sizes[1]} г.)`}
-            </span>
-          </Button>
-        </Card.Text>
-        <Card.Text>
-          <Button
-            variant="outline-warning"
-            size="lg"
-            active={selectedSouse === 0 ? true : false}
-            className={classnames('pizza__button', {
-              "pizza__button--hidden": pizza.souses.length === 0
-            })}
-            onClick={(e) => {
-              e.preventDefault();
-              setSelectedSouse(0);
-            }}
-          >
-            <strong className='pizza__txtStrong'>
-              {pizza.souses[0]}
+              {`${mangal.weight} г.`}
             </strong>
           </Button>
-          {pizza.souses.length === 2 && (
-            <Button 
-              variant="outline-warning" 
-              size="lg" 
-              className='pizza__button' 
-              onClick={(e) => {
-                e.preventDefault();
-                setSelectedSouse(1);
-              }}
-              active={selectedSouse === 1 ? true : false}
-            >
-            <strong className='pizza__txtStrong'>
-              {pizza.souses[1]}
-            </strong>
-            </Button>
           )}
         </Card.Text>
         <Card.Text >
           <strong className='pizzaCard__price'>
-            {`${pizza.prices[selectedSize]} грн.`}
+            {`${mangal.price} грн.`}
           </strong>
         </Card.Text>
         <Card.Text className='pizzaCard__counter'>
@@ -187,20 +132,17 @@ export const PizzaCard = () => {
             variant='warning'
             onClick={(e) => {
               e.preventDefault();
-              const copyPizza = JSON.parse(JSON.stringify(pizza));
-              copyPizza.selectedSize = selectedSize;
-              copyPizza.selectedSouse = copyPizza.souses[selectedSouse];
-              copyPizza.id += selectedSize.toString() + selectedSouse;
-              copyPizza.quantity = quantity || 1;
+              const copyMangal = JSON.parse(JSON.stringify(mangal));
+              copyMangal.quantity = quantity || 1;
               if (quantity === 0) {
                 setQuantity(1);
               }
               setShow(true);
-              if (productsInCart.some((pizza: any) => pizza.id === copyPizza.id)) {
-                const obj: any = {quantity, id: copyPizza.id};
+              if (productsInCart.some((product: any) => product.id === copyMangal.id)) {
+                const obj: any = {quantity, id: copyMangal.id};
                 dispatch(incrementWithValue(obj))
               } else {
-                  dispatch(addProduct(copyPizza));
+                  dispatch(addProduct(copyMangal));
                 }
             }}
           >
@@ -210,7 +152,7 @@ export const PizzaCard = () => {
           </Button>
         </Card.Text>
         <Alert className='pizza__alert' show={show}>
-          Піца додана до кошику
+          Страва додана до кошику
         </Alert>
             </Card.Body>
           </Card>
@@ -220,5 +162,6 @@ export const PizzaCard = () => {
     </Container>
   );
 };
+
 
 

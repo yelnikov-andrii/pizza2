@@ -1,0 +1,17 @@
+.categories {
+  &.navbar {
+    background: gray;
+    margin-bottom: 50px;
+  }
+
+  &__nav {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__link {
+    &.nav-link {
+      color: #fff;
+    }
+  }
+}

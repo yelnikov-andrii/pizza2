@@ -1,9 +1,9 @@
-import axios from 'axios';
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import './App.scss';
-import { url } from './data';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { Header } from './Components/Header/Header';
+import { Pizzas } from './Components/Pizzas/Pizzas';
 import { Main } from './Components/Main/Main';
 import { PizzaCard } from './Components/PizzaCard/PizzaCard';
 import { Cart } from './Components/Cart/Cart';
@@ -16,58 +16,55 @@ import { Vacancies } from './Components/Vacancies/Vacancies';
 import { Contacts } from './Components/Contacts/Contacts';
 import { Login } from './Components/Login/Login';
 import { Footer } from './Components/Footer/Footer';
-
-
-export const pizzasContext = React.createContext({});
+import { Sushi } from './Components/Sushi/Sushi';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { getProducts } from './redux/productsSlice';
+import { SushiCard } from './Components/SushiCard/SushiCard';
+import { Shaurmas } from './Components/Shaurmas/Shaurmas';
+import { ShaurmaCard } from './Components/ShaurmaCard/ShaurmaCard';
+import { Salads } from './Components/Salads/Salads';
+import { SaladCard } from './Components/SaladCard/SaladCard';
+import { Mangal } from './Components/Mangal/Mangal';
+import { MangalCard } from './Components/MangalCard/MangalCard';
+import { Snacks } from './Components/Snacks/Snacks';
+import { SnackCard } from './Components/SnackCard/SnackCard';
+import { Soupes } from './Components/Soupes/Soupes';
+import { SoupeCard } from './Components/SoupeCard/SoupeCard';
 
 function App() {
-  const [pizzas, setPizzas] = React.useState<any>([]);
-  const [pizzasInCart, setPizzasInCart] = React.useState<any>([]);
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState('');
-  let countOfPizzas = 0;
-    countOfPizzas = pizzasInCart.reduce((initialValue: any, pizza: any) => initialValue + pizza.quantity, 0);
+  const productsInCart = useSelector((state: any) => state.product.products);
+  const dispatch = useDispatch();
+
+    let countOfProducts = 0;
+    countOfProducts = productsInCart.reduce((initialValue: any, product: any) => initialValue + product.quantity, 0);
 
   React.useEffect(() => {
-    setLoading(true);
-    axios.get(url).then(res => {
-      setPizzas(res.data);
-    })
-    .catch(e => setError(e.message))
-    .finally(() => {
-      setLoading(false);
-    })
-  }, []);
-
-  React.useEffect(() => {
-    const pizzasFromStorage = localStorage.getItem('pizzasInCart') ? JSON.parse(localStorage.getItem("pizzasInCart") || '{}') : null;
-    if (pizzasFromStorage) {
-      setPizzasInCart(pizzasFromStorage);
+    const productsFromStorage = localStorage.getItem('productsInCart') ? JSON.parse(localStorage.getItem("productsInCart") || '{}') : null;
+    if (productsFromStorage) {
+      dispatch(getProducts(productsFromStorage))
     }
   }, []);
 
   React.useEffect(() => {
-    if (pizzasInCart.length > 0) {
-      localStorage.setItem('pizzasInCart', JSON.stringify(pizzasInCart))
+    if (productsInCart.length > 0) {
+      localStorage.setItem('productsInCart', JSON.stringify(productsInCart))
     } else {
       localStorage.clear()
     }
-  }, [pizzasInCart])
+  }, [productsInCart])
 
       return (
         <div className="App">
-          <pizzasContext.Provider value={{pizzas, pizzasInCart, setPizzasInCart}}>
-            <Header count={countOfPizzas}/>
+            <Header count={countOfProducts} />
             <Routes>
-              <Route path='/pizzas' element={<Main loading={loading} error={error}/>}>
+              <Route path='/' element={<Main />}>
+              </Route>
+              <Route path='/pizzas' element={<Pizzas/>}>
               </Route>
               <Route path='/pizzas/:pizzaId' element={<PizzaCard />}>
               </Route>
-              <Route
-                path="/"
-                element={<Navigate to="/pizzas" replace />}
-              />
-              <Route path='/cart' element={<Cart pizzasInCart={pizzasInCart} setPizzasInCart={setPizzasInCart}/>}>
+              <Route path='/cart' element={<Cart productsInCart={productsInCart}/>}>
               </Route>
               <Route path='/delivery' element={<Delivery />}>
               </Route>
@@ -85,9 +82,32 @@ function App() {
               </Route>
               <Route path='/login' element={<Login />}>
               </Route>
+              <Route path='/sushi' element={<Sushi />}>
+              </Route>
+              <Route path='/sushi/:sushiId' element={<SushiCard />}>
+              </Route>
+              <Route path='/shaurma' element={<Shaurmas />}>
+              </Route>
+              <Route path='/shaurma/:shaurmaId' element={<ShaurmaCard />}>
+              </Route>
+              <Route path='/salads' element={<Salads />}>
+              </Route>
+              <Route path='/salads/:saladId' element={<SaladCard />}>
+              </Route>
+              <Route path='/mangal' element={<Mangal />}>
+              </Route>
+              <Route path='/mangal/:mangalId' element={<MangalCard />}>
+              </Route>
+              <Route path='/snacks' element={<Snacks />}>
+              </Route>
+              <Route path='/snacks/:snackId' element={<SnackCard />}>
+              </Route>
+              <Route path='/soupes' element={<Soupes />}>
+              </Route>
+              <Route path='/soupes/:soupeId' element={<SoupeCard />}>
+              </Route>
             </Routes>
             <Footer />
-          </pizzasContext.Provider>
         </div>
       );
     }
