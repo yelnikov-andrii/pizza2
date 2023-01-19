@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addProduct, incrementWithValue } from '../../../../redux/productsSlice';
 import { LoadingCard } from '../../../UI/LoadingCard/LoadingCard';
+import { useGetPrevProps } from '../../../../hooks/useGetPrevProps';
 
 
 export const MangalCard = () => {
@@ -22,11 +23,18 @@ export const MangalCard = () => {
   const productsInCart = useSelector((state: any) => state.product.products);
   const [show, setShow] = React.useState(false);
   const dispatch = useDispatch();
+  const prevShow = useGetPrevProps(show);
 
   React.useEffect(() => {
-    setTimeout(() => {
-      setShow(false);
-    }, 2000);
+    let timerId;
+    if (prevShow === true) {
+      clearTimeout(timerId)
+    } else {
+      timerId = setTimeout(() => {
+        setShow(false);
+      }, 2000);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
 
   function getMangal() {

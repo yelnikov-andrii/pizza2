@@ -8,17 +8,25 @@ import { Alert } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { addProduct, increment } from '../../../../redux/productsSlice';
 import { useSelector } from 'react-redux';
+import { useGetPrevProps } from '../../../../hooks/useGetPrevProps';
 
 export const Shaurma: React.FC <any> = ({shaurma}) => {
   const [selectedSouse, setSelectedSouse] = React.useState(0);
   const productsInCart = useSelector((state: any) => state.product.products);
   const [show, setShow] = React.useState(false);
   const dispatch = useDispatch();
+  const prevShow = useGetPrevProps(show);
 
   React.useEffect(() => {
-    setTimeout(() => {
-      setShow(false);
-    }, 2000);
+    let timerId;
+    if (prevShow === true) {
+      clearTimeout(timerId)
+    } else {
+      timerId = setTimeout(() => {
+        setShow(false);
+      }, 2000);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
 
   return (
