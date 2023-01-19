@@ -4,13 +4,13 @@ import { categoriesArr, url } from '../../data';
 import { useGetThreeProducts } from '../../hooks/useGetThreeProducts';
 import { MainProduct } from './MainProduct';
 import Categories from './Categories';
-import { Pizza } from '../Pizzas/Pizza';
-import { SushiItem } from '../Sushi/SushiItem';
-import { Shaurma } from '../Shaurmas/Shaurma';
-import { Salad } from '../Salads/Salad';
-import { Snack } from '../Snacks/Snack';
-import { Soupe } from '../Soupes/Soupe';
-import { MangalItem } from '../Mangal/MangalItem';
+import { Pizza } from '../Products/Pizza/Pizzas/Pizza';
+import { SushiItem } from '../Products/Sushi/Sushi/SushiItem';
+import { Shaurma } from '../Products/Shaurma/Shaurmas/Shaurma';
+import { Salad } from '../Products/Salad/Salads/Salad';
+import { Snack } from '../Products/Snack/Snacks/Snack';
+import { Soupe } from '../Products/Soupe/Soupes/Soupe';
+import { MangalItem } from '../Products/Mangal/Mangal/MangalItem';
 
 export const Main = () => {
   const [pizzas, pizzasLoading, pizzasError]: any = useGetThreeProducts(url + '/pizzas/?count=3');

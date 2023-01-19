@@ -1,0 +1,9 @@
+@import './Pizza.scss';
+@import '../PizzaCard/PizzaCard.scss';
+
+.pizzas {
+  display: flex;
+  gap: calc(10% / 2);
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
