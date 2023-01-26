@@ -3,14 +3,13 @@ import ContentLoader from 'react-content-loader';
 
 export const Loader = () => {
   return (
-    <div>
+    <div className="loader">
       <ContentLoader
         speed={2}
-        width={600}
-        height={500}
         viewBox="0 0 600 500"
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
+        className='loader__content'
         >
         <rect x="129" y="16" rx="0" ry="0" width="310" height="210" /> 
         <rect x="132" y="237" rx="0" ry="0" width="170" height="20" /> 
@@ -23,11 +22,10 @@ export const Loader = () => {
       </ContentLoader>
       <ContentLoader
         speed={2}
-        width={600}
-        height={500}
         viewBox="0 0 600 500"
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
+        className='loader__content'
         >
         <rect x="129" y="16" rx="0" ry="0" width="310" height="210" /> 
         <rect x="132" y="237" rx="0" ry="0" width="170" height="20" /> 
@@ -40,11 +38,10 @@ export const Loader = () => {
       </ContentLoader>
       <ContentLoader
         speed={2}
-        width={600}
-        height={500}
         viewBox="0 0 600 500"
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
+        className='loader__content'
         >
         <rect x="129" y="16" rx="0" ry="0" width="310" height="210" /> 
         <rect x="132" y="237" rx="0" ry="0" width="170" height="20" /> 
