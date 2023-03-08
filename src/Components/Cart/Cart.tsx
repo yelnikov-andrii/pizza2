@@ -19,7 +19,7 @@ export const Cart: React.FC <any> = () => {
     }, 3000);
   }, [filled]);
 
-  if (productsInCart.length === 0) {
+  if (productsInCart.length === 0 && filled === false) {
     return (
       <Container className='cart'>
         <h1 className='cart__header'>

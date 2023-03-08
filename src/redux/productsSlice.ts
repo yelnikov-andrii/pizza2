@@ -22,10 +22,13 @@ export const productsSlice: any = createSlice({
     },
     removeProduct: (state, action: any) => {
       state.products = state.products.filter((el: any) => el.id !== action.payload);
+    },
+    clearCart: (state) => {
+      state.products = [];
     }
   }
 })
 
-export const { addProduct, increment, removeProduct, getProducts, incrementWithValue } = productsSlice.actions
+export const { addProduct, increment, removeProduct, getProducts, incrementWithValue, clearCart } = productsSlice.actions
 
 export default productsSlice.reducer

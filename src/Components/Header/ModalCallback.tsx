@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 interface Props {
   show: boolean;
@@ -10,6 +11,20 @@ interface Props {
 
 export const ModalCallback: React.FC <Props> = ({setShow, show}) => {
   const handleClose = () => setShow(false);
+  const [name, setName] = React.useState('');
+  const [number, setNumber] = React.useState('');
+
+  const sendInfo = (name: string, number: string) => {
+    axios.post('https://apipizzas.onrender.com/calls', {name, number})
+      .then(response => {
+        console.log(response)
+        setName('');
+        setNumber('');
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  }
 
   return (
       <Modal 
@@ -26,6 +41,7 @@ export const ModalCallback: React.FC <Props> = ({setShow, show}) => {
           className="contactsForm" 
           onSubmit={(e) => {
             e.preventDefault();
+            sendInfo(name, number);
             handleClose();
           }}
         >
@@ -38,7 +54,11 @@ export const ModalCallback: React.FC <Props> = ({setShow, show}) => {
             </Form.Label>
             <Form.Control 
               type="text" 
-              placeholder="Ім'я" 
+              placeholder="Ім'я"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
             />
           </Form.Group>
           <Form.Group 
@@ -49,8 +69,14 @@ export const ModalCallback: React.FC <Props> = ({setShow, show}) => {
               Телефон
             </Form.Label>
             <Form.Control 
-              type="text" 
-              placeholder="Телефон" 
+              type="phone"
+              placeholder="Телефон"
+              value={number}
+              onChange={(e) => {
+                if (!isNaN(+e.target.value)) {
+                  setNumber(e.target.value);
+                }
+              }}
             />
           </Form.Group>
           <Button 

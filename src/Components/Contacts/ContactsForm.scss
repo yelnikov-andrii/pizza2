@@ -2,4 +2,17 @@
   &__textarea {
     margin-bottom: 20px;
   }
+
+  &__emailErrorInput {
+    &.form-control {
+      &:focus {
+        border: 1px solid red;
+        box-shadow: 0 0 0 0.25rem red;
+      }
+    }
+  }
+
+  &__emailErrortxt {
+    color: red;
+  }
 }

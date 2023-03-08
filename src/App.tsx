@@ -12,8 +12,13 @@ function App() {
   const productsInCart = useSelector((state: any) => state.product.products);
   const dispatch = useDispatch();
 
-    let countOfProducts = 0;
-    countOfProducts = productsInCart.reduce((initialValue: any, product: any) => initialValue + product.quantity, 0);
+    const getCountOfProducts = () => {
+      return productsInCart.reduce((initialValue: any, product: any) => initialValue + product.quantity, 0);
+    }
+
+    const countOfProducts = React.useMemo(() => {
+      return getCountOfProducts();
+    }, [productsInCart])
 
   React.useEffect(() => {
     const productsFromStorage = localStorage.getItem('productsInCart') ? JSON.parse(localStorage.getItem("productsInCart") || '{}') : null;
