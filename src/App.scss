@@ -1,5 +1,6 @@
 @import './Components/UI/index.scss';
-@import './Components/Products/Pizza/Pizzas/Pizzas.scss';
+@import './Components//Products/Products.scss';
+@import './Components/ProductCard/ProductCard.scss';
 @import './Components/Delivery/Delivery.scss';
 @import './Components/About/About.scss';
 @import './Components/Blog/Blog.scss';
@@ -11,3 +12,8 @@
 @import './Components/Cart/Cart.scss';
 @import './Components/Contacts/Contacts.scss';
 @import './Components/Footer/Footer.scss';
+@import './Components/Login/Login.scss';
+@import './Components/Registration/Registration.scss';
+@import './Components/PageNotFound/PageNotFound.scss';
+@import './Components/ActivationPage/Activation.scss';
+@import './Components/PersonalAccount/PersonalAccount.scss';

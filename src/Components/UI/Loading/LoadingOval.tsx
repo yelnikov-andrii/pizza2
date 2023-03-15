@@ -1,11 +1,10 @@
 import React from 'react';
 import { Oval } from  'react-loader-spinner';
-import { Loader } from '../Loader/Loader';
 
-export const Loading = () => {
+export const LoadingOval = () => {
   return (
     <div>
-    <h1>
+      <h1>
       Завантаження...
     </h1>
     <Oval
@@ -20,10 +19,7 @@ export const Loading = () => {
         strokeWidth={2}
         strokeWidthSecondary={2}
       />
-      <div className="pizzas__block">
-        <Loader />
-      </div>
-  </div>
+    </div>
   );
 };
 

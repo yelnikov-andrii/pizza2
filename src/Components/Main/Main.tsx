@@ -1,41 +1,29 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import { categoriesArr, url } from '../../data';
-import { useGetThreeProducts } from '../../hooks/useGetThreeProducts';
+import { categoriesArr } from '../../data';
 import { MainProduct } from './MainProduct';
 import Categories from './Categories';
-import { Pizza } from '../Products/Pizza/Pizzas/Pizza';
-import { SushiItem } from '../Products/Sushi/Sushi/SushiItem';
-import { Shaurma } from '../Products/Shaurma/Shaurmas/Shaurma';
-import { Salad } from '../Products/Salad/Salads/Salad';
-import { Snack } from '../Products/Snack/Snacks/Snack';
-import { Soupe } from '../Products/Soupe/Soupes/Soupe';
-import { MangalItem } from '../Products/Mangal/Mangal/MangalItem';
+import { useGetMainPageProducts } from '../../hooks/useGetMainPageProducts';
+import { Product } from '../Products/Product/Product';
 
 export const Main = () => {
-  const [pizzas, pizzasLoading, pizzasError]: any = useGetThreeProducts(url + '/pizzas/?count=3');
-  const [sushi, sushiLoading, sushiError]: any = useGetThreeProducts(url + '/sushi/?count=3');
-  const [shaurma, shaurmaLoading, shaurmaError]: any = useGetThreeProducts(url + '/shaurma/?count=3');
-  const [salads, saladsLoading, saladsError]: any = useGetThreeProducts(url + '/salads/?count=3');
-  const [mangal, mangalLoading, mangalError]: any = useGetThreeProducts(url + '/mangal/?count=3');
-  const [snacks, snacksLoading, snacksError]: any = useGetThreeProducts(url + '/snacks/?count=3');
-  const [soupes, soupesLoading, soupesError]: any = useGetThreeProducts(url + '/soupes/?count=3');
+  const { pizzaObj, sushiObj, shaurmaObj, saladsObj, snacksObj, soupesObj, mangalObj } = useGetMainPageProducts();
 
   return (
     <Container 
-      className='main' 
+      className='main'
       fluid
     >
       <Categories arr={categoriesArr} />
       <MainProduct 
         categoryName="Піца" 
         categoryLink="pizzas" 
-        loading={pizzasLoading} 
-        error={pizzasError}
+        loading={pizzaObj.pizzasLoading} 
+        error={pizzaObj.pizzasError}
       >
-        {pizzas.map((pizza: any) => (
-          <Pizza 
-            pizza={pizza} 
+        {pizzaObj.pizzas && pizzaObj.pizzas.map((pizza: any) => (
+          <Product 
+            product={pizza} 
             key={pizza.id}
             link={`/pizzas/${pizza.id}`}
           />
@@ -43,13 +31,13 @@ export const Main = () => {
       </MainProduct>
       <MainProduct 
         categoryName="Суші" 
-        categoryLink="sushi"
-        loading={sushiLoading} 
-        error={sushiError}
+        categoryLink="sushi" 
+        loading={sushiObj.sushiLoading} 
+        error={sushiObj.sushiError}
       >
-        {sushi.map((sushiItem: any) => (
-          <SushiItem 
-            sushiItem={sushiItem} 
+        {sushiObj.sushi && sushiObj.sushi.map((sushiItem: any) => (
+          <Product 
+            product={sushiItem} 
             key={sushiItem.id}
             link={`/sushi/${sushiItem.id}`}
           />
@@ -57,70 +45,70 @@ export const Main = () => {
       </MainProduct>
       <MainProduct 
         categoryName="Шаурма" 
-        categoryLink="shaurma"
-        loading={shaurmaLoading} 
-        error={shaurmaError}
+        categoryLink="shaurma" 
+        loading={shaurmaObj.shaurmaLoading} 
+        error={shaurmaObj.shaurmaError}
       >
-        {shaurma.map((shaurmaItem: any) => (
-          <Shaurma 
-            shaurma={shaurmaItem} 
+        {shaurmaObj.shaurma && shaurmaObj.shaurma.map((shaurmaItem: any) => (
+          <Product 
+            product={shaurmaItem} 
             key={shaurmaItem.id}
             link={`/shaurma/${shaurmaItem.id}`}
           />
         ))}
       </MainProduct>
       <MainProduct 
-        categoryName="Салати" 
-        categoryLink="salads"
-        loading={saladsLoading} 
-        error={saladsError}
+        categoryName="Салати"
+        categoryLink="salads" 
+        loading={saladsObj.saladsLoading} 
+        error={saladsObj.saladsError}
       >
-        {salads.map((salad: any) => (
-          <Salad 
-            salad={salad} 
+        {saladsObj.salads && saladsObj.salads.map((salad: any) => (
+          <Product 
+            product={salad} 
             key={salad.id}
             link={`/salads/${salad.id}`}
           />
         ))}
       </MainProduct>
       <MainProduct 
-        categoryName="Мангал" 
-        categoryLink="mangal"
-        loading={mangalLoading} 
-        error={mangalError}
+        categoryName="Закуски"
+        categoryLink="snacks" 
+        loading={snacksObj.snacksLoading} 
+        error={snacksObj.snacksError}
       >
-        {mangal.map((mangalItem: any) => (
-          <MangalItem 
-            mangal={mangalItem} 
-            key={mangalItem.id} 
-            link={`/mangal/${mangalItem.id}`}
-          />
-        ))}
-      </MainProduct>
-      <MainProduct 
-        categoryName="Закуски" 
-        categoryLink="snacks"
-        loading={snacksLoading} 
-        error={snacksError}
-      >
-        {snacks.map((snack: any) => (
-          <Snack 
-            snack={snack} 
-            key={snack.id} 
+        {snacksObj.snacks && snacksObj.snacks.map((snack: any) => (
+          <Product 
+            product={snack} 
+            key={snack.id}
             link={`/snacks/${snack.id}`}
           />
         ))}
       </MainProduct>
       <MainProduct 
-        categoryName="Супи" 
-        categoryLink="soupes"
-        loading={soupesLoading} 
-        error={soupesError}
+        categoryName="Мангал"
+        categoryLink="mangal" 
+        loading={mangalObj.mangalLoading} 
+        error={mangalObj.mangalError}
       >
-        {soupes.map((soupe: any) => (
-          <Soupe 
-            soupe={soupe} 
-            key={soupe.id} 
+        {mangalObj.mangal && mangalObj.mangal.map((mangalItem: any) => (
+          <Product 
+            product={mangalItem} 
+            key={mangalItem.id}
+            link={`/mangal/${mangalItem.id}`}
+          />
+        ))}
+      </MainProduct>
+      <MainProduct 
+        categoryName="Супи"
+        categoryLink="soupes" 
+        loading={soupesObj.soupesLoading} 
+        error={soupesObj.soupesError}
+      >
+        {soupesObj.soupes && soupesObj.soupes.map((soupe: any) => (
+          <Product 
+            product={soupe} 
+            key={soupe.id}
             link={`/soupes/${soupe.id}`}
           />
         ))}

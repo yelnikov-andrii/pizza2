@@ -1,10 +1,11 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 import ContentLoader from 'react-content-loader';
 import { Oval } from  'react-loader-spinner';
 
 export const LoadingCard = () => {
   return (
-    <div>
+    <Container className='pizzaCard'>
     <h1>
       Loading...
     </h1>
@@ -38,7 +39,7 @@ export const LoadingCard = () => {
           <rect x="950" y="420" rx="0" ry="0" width="200" height="57" />
         </ContentLoader>
       </div>
-  </div>
+  </Container>
   );
 };
 

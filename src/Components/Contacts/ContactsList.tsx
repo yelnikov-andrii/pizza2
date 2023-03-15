@@ -21,7 +21,7 @@ export const ContactsList: React.FC <Props> = ({ data }) => {
         ))
       ) : data[0].hasOwnProperty('mailto') ? (
           data.map((item: DataItem) => (
-            <li className="contactsList__item">
+            <li className="contactsList__item" key={item.name}>
               <a className="contactsList__link" href={item.mailto}>
                 {data[0].name}
               </a>

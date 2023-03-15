@@ -7,21 +7,15 @@ import { Discounts } from "../Components/Discounts/Discounts";
 import { Login } from "../Components/Login/Login";
 import { Main } from "../Components/Main/Main"
 import { Places } from "../Components/Places/Places";
-import { Mangal } from "../Components/Products/Mangal/Mangal/Mangal";
-import { MangalCard } from "../Components/Products/Mangal/MangalCard/MangalCard";
-import { PizzaCard } from "../Components/Products/Pizza/PizzaCard/PizzaCard";
-import { Pizzas } from "../Components/Products/Pizza/Pizzas/Pizzas";
-import { SaladCard } from "../Components/Products/Salad/SaladCard/SaladCard";
-import { Salads } from "../Components/Products/Salad/Salads/Salads";
-import { ShaurmaCard } from "../Components/Products/Shaurma/ShaurmaCard/ShaurmaCard";
-import { Shaurmas } from "../Components/Products/Shaurma/Shaurmas/Shaurmas";
-import { SnackCard } from "../Components/Products/Snack/SnackCard/SnackCard";
-import { Snacks } from "../Components/Products/Snack/Snacks/Snacks";
-import { SoupeCard } from "../Components/Products/Soupe/SoupeCard/SoupeCard";
-import { Soupes } from "../Components/Products/Soupe/Soupes/Soupes";
-import { Sushi } from "../Components/Products/Sushi/Sushi/Sushi";
-import { SushiCard } from "../Components/Products/Sushi/SushiCard/SushiCard";
 import { Vacancies } from "../Components/Vacancies/Vacancies";
+import { Registration } from "../Components/Registration/Registration";
+import { PageNotFound } from "../Components/PageNotFound/PageNotFound";
+import { Activation } from "../Components/ActivationPage/Activation";
+import { PersonalAccount } from "../Components/PersonalAccount/PersonalAccount";
+import { Products } from "../Components/Products/Products";
+import { ProductCard } from "../Components/ProductCard/ProductCard";
+import { Order } from "../Components/PersonalAccount/Order";
+import { RequireAuth } from "../Components/RequireAuth/RequireAuth";
 
 interface Route {
   path: string;
@@ -35,11 +29,101 @@ export const routes: Route[] = [
   },
   {
     path: '/pizzas',
-    component: <Pizzas />
+    component: 
+    <Products 
+      typeId={1} 
+      productCategories={['Усі', 'Сирні', 'М\'ясні', 'Овочеві', 'Фірмові', 'Морські']}
+      name="Піца"
+    />
   },
   {
-    path: '/pizzas/:pizzaId',
-    component: <PizzaCard />
+    path: '/pizzas/:id',
+    component: 
+    <ProductCard />
+  },
+  {
+    path: '/sushi',
+    component: 
+    <Products 
+      typeId={2}
+      productCategories={['Усі', 'Суші-сети', 'Cуші', 'Гункани', 'Роли', 'Теплі Роли']}
+      name="Суші"
+    />
+  },
+  {
+    path: '/sushi/:id',
+    component: 
+    <ProductCard />
+  },
+  {
+    path: '/shaurma',
+    component: 
+    <Products 
+      typeId={3}
+      productCategories={[]}
+      name="Шаурма"
+    />
+  },
+  {
+    path: '/shaurma/:id',
+    component: 
+    <ProductCard />
+  },
+  {
+    path: '/salads',
+    component: 
+    <Products 
+      typeId={4}
+      productCategories={[]}
+      name="Салати"
+    />
+  },
+  {
+    path: '/salads/:id',
+    component: 
+    <ProductCard />
+  },
+  {
+    path: '/mangal',
+    component: 
+    <Products 
+      typeId={5}
+      productCategories={[]}
+      name="Мангал"
+    />
+  },
+  {
+    path: '/mangal/:id',
+    component: 
+    <ProductCard />
+  },
+  {
+    path: '/snacks',
+    component: 
+    <Products 
+      typeId={6}
+      productCategories={['Усі', 'Холодні закуски', 'До пива',]}
+      name="Закуски"
+    />
+  },
+  {
+    path: '/snacks/:id',
+    component: 
+    <ProductCard />
+  },
+  {
+    path: '/soupes',
+    component: 
+    <Products 
+      typeId={7}
+      productCategories={['Усі', 'Японські супи', 'Перші страви',]}
+      name="Супи"
+    />
+  },
+  {
+    path: '/soupes/:id',
+    component: 
+    <ProductCard />
   },
   {
     path: '/cart',
@@ -78,51 +162,25 @@ export const routes: Route[] = [
     component: <Login />
   },
   {
-    path: '/sushi',
-    component: <Sushi />
+    path: '/registration',
+    component: <Registration />
   },
   {
-    path: '/sushi/:sushiId',
-    component: <SushiCard />
+    path: '/activation/:activationToken',
+    component: <Activation />
   },
   {
-    path: '/shaurma',
-    component: <Shaurmas />
+    path: '/personal-account',
+    component: <RequireAuth>
+      <PersonalAccount />
+    </RequireAuth>
   },
   {
-    path: '/shaurma/:shaurmaId',
-    component: <ShaurmaCard />
+    path: '/personal-account/orders/:id',
+    component: <Order  />
   },
   {
-    path: '/salads',
-    component: <Salads />
+    path: '/*',
+    component: <PageNotFound />
   },
-  {
-    path: '/salads/:saladId',
-    component: <SaladCard />
-  },
-  {
-    path: '/mangal',
-    component: <Mangal />
-  },
-  {
-    path: '/mangal/:mangalId',
-    component: <MangalCard />
-  },
-  {
-    path: '/snacks',
-    component: <Snacks />
-  },
-  {
-    path: '/snacks/:snackId',
-    component: <SnackCard />
-  },
-  {
-    path: '/soupes',
-    component: <Soupes />
-  },
-  {
-    path: '/soupes/:soupeId',
-    component: <SoupeCard />
-  }
 ];

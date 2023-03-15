@@ -27,7 +27,7 @@ export const MainProduct: React.FC <any> = ({categoryName, categoryLink, loading
                 {categoryName}
               </h2>
             </LinkContainer>
-            <Container className='pizzas'>
+            <Container className='products'>
               {children}
             </Container>
           </>

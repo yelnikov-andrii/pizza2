@@ -1,0 +1,31 @@
+.login {
+  padding: 20px 0;
+
+  &__title {
+    font-size: 48px;
+    font-weight: 900;
+    text-align: center;
+    margin: 0 0 20px 0;
+
+    @media (max-width: 768px) {
+      font-size: 24px;
+      font-weight: 700;
+    }
+  }
+
+  &__form {
+    width: 50%;
+
+    @media (max-width: 768px) {
+      width: 90%;
+    }
+  }
+
+  &__error {
+    color: red;
+  }
+
+  &__unauthorized {
+    margin-top: 20px;
+  }
+}

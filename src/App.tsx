@@ -7,18 +7,16 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getProducts } from './redux/productsSlice';
 import { AppRouter } from './Components/AppRouter/AppRouter';
+import { useGetCountOfProducts } from './hooks/useGetCountOfProducts';
+import axios from 'axios';
+import { setUser } from './redux/authSlice';
+import { url } from './data';
 
 function App() {
   const productsInCart = useSelector((state: any) => state.product.products);
+  const countOfProducts = useGetCountOfProducts(productsInCart);
   const dispatch = useDispatch();
-
-    const getCountOfProducts = () => {
-      return productsInCart.reduce((initialValue: any, product: any) => initialValue + product.quantity, 0);
-    }
-
-    const countOfProducts = React.useMemo(() => {
-      return getCountOfProducts();
-    }, [productsInCart])
+  const user = useSelector((state: any) => state.auth.user);
 
   React.useEffect(() => {
     const productsFromStorage = localStorage.getItem('productsInCart') ? JSON.parse(localStorage.getItem("productsInCart") || '{}') : null;
@@ -31,9 +29,38 @@ function App() {
     if (productsInCart.length > 0) {
       localStorage.setItem('productsInCart', JSON.stringify(productsInCart))
     } else {
-      localStorage.clear()
+      localStorage.setItem('productsInCart', JSON.stringify(productsInCart))
     }
-  }, [productsInCart])
+  }, [productsInCart]);
+
+  async function checkAuth() {
+    axios.get(url + '/refresh', {
+      // withCredentials: true,
+
+    })
+      .then(response => {
+        localStorage.setItem('accessToken', response.data.accessToken);
+        dispatch(setUser(response.data.user));
+      })
+
+  }
+
+  React.useEffect(() => {
+
+    checkAuth()
+    .catch((e) => {
+      if (e.response.data.status === 401) {
+        checkAuth()
+          .then((response: any) => {
+            localStorage.setItem('accessToken', response.data.accessToken);
+          dispatch(setUser(response.data.user));
+          })
+          .catch((e) => {
+            console.log(e);
+          })
+      }
+    })
+  }, []);
 
       return (
         <div className="App">

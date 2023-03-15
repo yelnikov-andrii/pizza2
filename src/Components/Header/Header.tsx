@@ -7,6 +7,11 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { ModalCallback } from './ModalCallback';
 import { NavLink } from '../../types/types';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/authSlice';
+import axios from 'axios';
+import { url } from '../../data';
 
 interface Props {
   count: number;
@@ -47,6 +52,9 @@ export const Header:React.FC<Props> = ({count}) => {
   const phones = ['+3809312345678',
   '+3806712345678',
   '+3809912345678',];
+  const accessToken = localStorage.getItem('accessToken');
+  const user = useSelector((state: any) => state.auth.user);
+  const dispatch = useDispatch();
 
   const handleShow = () => setShow(true);
   return (
@@ -101,11 +109,34 @@ export const Header:React.FC<Props> = ({count}) => {
             >
               Замовити дзвінок
             </Button>
-            <LinkContainer to="login">
+            {!user && !accessToken ? (
+              <LinkContainer to="login">
               <Nav.Link>
                 Логін
               </Nav.Link>
             </LinkContainer>
+            ) : (
+              <>
+              <Nav.Link onClick={(e) => {
+                e.preventDefault();
+                axios.get(`${url}/logout`, {
+                  // withCredentials: true
+                })
+                .then(response => {
+                  console.log(response)
+                })
+                dispatch(setUser(null));
+                localStorage.setItem('accessToken', '');
+              }}>
+                Вийти
+              </Nav.Link>
+              <LinkContainer to="personal-account">
+                <Nav.Link>
+                  Кабінет особистий
+                </Nav.Link>
+              </LinkContainer>
+              </>
+            )}
           <LinkContainer to="cart">
             <Nav.Link className='header__cart'>
               Кошик 

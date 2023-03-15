@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { url } from '../../data';
 import { clearCart } from '../../redux/productsSlice';
 
 interface Props {
@@ -17,23 +18,22 @@ export const CartForm: React.FC <Props> = ({setFilled}) => {
 
   const productsInCart = useSelector((state: any) => state.product.products);
   const dispatch = useDispatch();
+  const user = useSelector((state: any) => state.auth.user);
   const normalizedProducts = productsInCart.map((product: any) => {
-    const {name, selectedSize, selectedSouse, quantity} = product;
-    return {name, selectedSize, selectedSouse, quantity}
+    const {id, selectedSize, name, selectedSouse, quantity} = product;
+    return {id, name, selectedSize, selectedSouse, quantity}
   });
-  const products = JSON.stringify(normalizedProducts)
-
+  const products = JSON.stringify(normalizedProducts);
 
   function sendOrder() {
-    console.log(products)
-    axios.post('https://apipizzas.onrender.com/orders', {name, phone, address, products})
+    axios.post(`${url}/orders`, {name, phone, address, products, email: user.email || null })
       .then(response => {
         console.log(response);
         setName('');
         setPhone('');
         setAddress('');
         setFilled(true);
-        localStorage.clear();
+        localStorage.setItem('productsInCart', '');
         dispatch(clearCart());
       })
       .catch((e) => {
