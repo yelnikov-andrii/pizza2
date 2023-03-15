@@ -36,8 +36,8 @@ function App() {
   async function checkAuth() {
     axios.get(url + '/refresh', {
       withCredentials: true,
-
-    })
+      credentials: 'include',
+    } as any)
       .then(response => {
         localStorage.setItem('accessToken', response.data.accessToken);
         dispatch(setUser(response.data.user));
