@@ -36,11 +36,15 @@ function App() {
   async function checkAuth() {
     axios.get(url + '/refresh', {
       withCredentials: true,
-      credentials: 'include',
+      // credentials: 'include',
     } as any)
       .then(response => {
+        console.log('checked true')
         localStorage.setItem('accessToken', response.data.accessToken);
         dispatch(setUser(response.data.user));
+      })
+      .catch((e) => {
+        console.log(e)
       })
 
   }
