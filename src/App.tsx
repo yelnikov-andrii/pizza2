@@ -35,7 +35,7 @@ function App() {
 
   async function checkAuth() {
     axios.get(url + '/refresh', {
-      // withCredentials: true,
+      withCredentials: true,
 
     })
       .then(response => {

@@ -14,7 +14,7 @@ export const Products: React.FC <any> = ({typeId, productCategories, name}) => {
 
   function getProducts() {
     return axios.get(`${url}/products?typeId=${typeId}`, {
-      // withCredentials: true,
+      withCredentials: true,
     } as any)
   }
 

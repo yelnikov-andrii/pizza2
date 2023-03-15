@@ -51,7 +51,9 @@ export const Login = () => {
   }
 
   function login() {
-    axios.post(`${url}/login`, {email, password})
+    axios.post(`${url}/login`, {email, password}, {
+      withCredentials: true
+    })
       .then(response => {
         dispatch(setUser(response.data.user));
         localStorage.setItem('accessToken', response.data.accessToken);
