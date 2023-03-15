@@ -120,7 +120,7 @@ export const Header:React.FC<Props> = ({count}) => {
               <Nav.Link onClick={(e) => {
                 e.preventDefault();
                 axios.get(`${url}/logout`, {
-                  // withCredentials: true
+                  withCredentials: true
                 })
                 .then(response => {
                   console.log(response)
