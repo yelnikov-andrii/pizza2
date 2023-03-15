@@ -69,7 +69,7 @@ export const Header:React.FC<Props> = ({count}) => {
         className='header__container'
       >
         <LinkContainer 
-          to="/" 
+          to="/pizza2" 
           className="header__linkContainer"
         >
           <Navbar.Brand>
