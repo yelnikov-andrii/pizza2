@@ -40,6 +40,7 @@ function App() {
     } as any)
       .then(response => {
         console.log('checked true')
+        console.log(response)
         localStorage.setItem('accessToken', response.data.accessToken);
         dispatch(setUser(response.data.user));
       })
