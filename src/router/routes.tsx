@@ -24,7 +24,7 @@ interface Route {
 
 export const routes: Route[] = [
   {
-    path: '/pizza2',
+    path: '/',
     component: <Main />,
   },
   {
