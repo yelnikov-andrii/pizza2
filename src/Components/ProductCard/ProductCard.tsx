@@ -30,7 +30,7 @@ export const ProductCard = () => {
   if (error) {
     return (
       <Container className='productCard'>
-        <h1>Error: we can not load product because {error}</h1>
+        <h1>Продукт не вдалося завнтажити. Помилка: {error}</h1>
       </Container>
     )
   }

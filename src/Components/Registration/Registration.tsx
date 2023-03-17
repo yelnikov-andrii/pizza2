@@ -2,50 +2,28 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Container } from 'react-bootstrap';
-import axios from 'axios';
-import { url } from '../../API/index';
+import { usePasswordHandler } from '../../hooks/usePasswordHandler';
+import { useEmailHandler } from '../../hooks/useEmailHandler';
+import { useRegister } from '../../API/services/Auth/useRegister';
+import { RegistrationSuccess } from './RegistrationSuccess';
 
 export const Registration = () => {
   const [email, setEmail] = React.useState('');
-  const [error, setError] = React.useState('');
-  const [emailError, setEmailError] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
   const [emailIsDirty, setEmailIsDirty] = React.useState(false)
   const [passwordIsValid, setPasswordIsValid] = React.useState(false);
   const [passwordIsDirty, setPasswordIsDirty] = React.useState(false);
-  const [passwordError, setPasswordError] = React.useState('');
   const [success, setSuccess] = React.useState(false);
+  const { passwordError, handlePassword } = usePasswordHandler(setPassword);
+  const {emailError, emailHandler } = useEmailHandler(setEmail);
+  const { register, emailErrorRequest, error } = useRegister(onSuccess);
 
-  const regexEmail = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
-
-  function validateEmail(str: string) {
-    if (!str) {
-      return 'Email can not be empty'
-    }
-    if (regexEmail.test(str)) {
-      return ''
-  } else {
-      return 'Email is not valid'
-  }
-  }
-
-  const emailHandler = (str: string) => {
-    setEmail(str);
-    setEmailError(validateEmail(str));
-  }
-
-  function handlePassword(password: string) {
-    if (!password) {
-      setPasswordError('Password can not be empty')
-    }
-    if (password.length < 6) {
-      setPasswordError('Password must be at least 6 characters')
-    } else {
-      setPasswordError('');
-    }
-
-    setPassword(password);
+  function onSuccess() {
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setSuccess(true);
   }
 
   React.useEffect(() => {
@@ -57,32 +35,8 @@ export const Registration = () => {
 
   if (success) {
     return (
-      <Container className='registration'>
-        <h1 className='registration__title'>
-          Реєстрація
-        </h1>
-        <p className='registration__success'>
-          На вашу пошту було відправлене повідомлення з активаціонним посиланням
-        </p>
-      </Container>
+      <RegistrationSuccess />
     )
-  }
-
-  function register({email, password}: any) {
-    axios.post(`${url}/registration`, {email, password})
-      .then(response => {
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
-        setSuccess(true);
-      })
-      .catch((e) => {
-        console.log(e)
-        setError(e.response.data.message);
-        if (e.response.data.errors.email) {
-          setEmailError(e.response.data.errors.email)
-        }
-      })
   }
 
   return (
@@ -103,9 +57,9 @@ export const Registration = () => {
         <Form.Label>
           Email
         </Form.Label>
-        {emailError && emailIsDirty && (
+        {(emailError || emailErrorRequest) && emailIsDirty && (
           <p className='registration__error'>
-            {emailError}
+            {emailError || email}
           </p>
         )}
         <Form.Control 
@@ -176,6 +130,3 @@ export const Registration = () => {
     </Container>
   );
 };
-
-
-

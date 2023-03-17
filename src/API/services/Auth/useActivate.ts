@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../../redux/authSlice';
-import { url } from '../../index';
+import { url } from '../../';
 
 export const useActivate = () => {
   const { activationToken } = useParams();

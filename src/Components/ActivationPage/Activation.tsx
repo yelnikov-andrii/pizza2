@@ -18,11 +18,11 @@ export const Activation: React.FC = () => {
       <Container className='activation'>
         {checked && isActivated ? (
           <h4>
-            User was activated
+            Акаунт успішно активований
           </h4>
         ) : (
           <h4>
-            User has already activated or your link is not correct
+            Користувач вже зареєстрований, або посилання помилкове
           </h4>
         )}
       </Container>

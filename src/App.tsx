@@ -8,15 +8,13 @@ import { useDispatch } from 'react-redux';
 import { getProducts } from './redux/productsSlice';
 import { AppRouter } from './Components/AppRouter/AppRouter';
 import { useGetCountOfProducts } from './hooks/useGetCountOfProducts';
-import axios from 'axios';
-import { setUser } from './redux/authSlice';
-import { url } from './API';
+import { useCheckAuth } from './API/services/Auth/useCheckAuth';
 
 function App() {
   const productsInCart = useSelector((state: any) => state.product.products);
   const countOfProducts = useGetCountOfProducts(productsInCart);
   const dispatch = useDispatch();
-  const user = useSelector((state: any) => state.auth.user);
+  const { refresh } = useCheckAuth();
 
   React.useEffect(() => {
     const productsFromStorage = localStorage.getItem('productsInCart') ? JSON.parse(localStorage.getItem("productsInCart") || '{}') : null;
@@ -26,45 +24,13 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    if (productsInCart.length > 0) {
-      localStorage.setItem('productsInCart', JSON.stringify(productsInCart))
-    } else {
-      localStorage.setItem('productsInCart', JSON.stringify(productsInCart))
-    }
+    localStorage.setItem('productsInCart', JSON.stringify(productsInCart))
   }, [productsInCart]);
 
-  async function checkAuth() {
-    axios.get(url + '/refresh', {
-      withCredentials: true,
-      // credentials: 'include',
-    } as any)
-      .then(response => {
-        console.log('checked true')
-        console.log(response)
-        localStorage.setItem('accessToken', response.data.accessToken);
-        dispatch(setUser(response.data.user));
-      })
-      .catch((e) => {
-        console.log(e)
-      })
 
-  }
 
   React.useEffect(() => {
-
-    checkAuth()
-    .catch((e) => {
-      if (e.response.data.status === 401) {
-        checkAuth()
-          .then((response: any) => {
-            localStorage.setItem('accessToken', response.data.accessToken);
-          dispatch(setUser(response.data.user));
-          })
-          .catch((e) => {
-            console.log(e);
-          })
-      }
-    })
+    refresh()
   }, []);
 
       return (

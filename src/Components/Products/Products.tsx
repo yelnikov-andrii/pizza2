@@ -25,7 +25,7 @@ export const Products: React.FC <any> = ({typeId, productCategories, name}) => {
   if (error) {
     return (
       <Container className='main'>
-        <h1>Error: we will not show you products, because {error}</h1>
+        <h1>Продукти не вдалося завнтажити. Помилка: {error}</h1>
       </Container>
     )
   }

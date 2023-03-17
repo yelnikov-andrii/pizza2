@@ -8,7 +8,7 @@ export const MainProduct: React.FC <any> = ({categoryName, categoryLink, loading
   if (error) {
     return (
       <Container className='main'>
-        <h1>Error: we will not show you products, because {error}</h1>
+        <h1>Не можемо завантажити продукти. Помилка: {error}</h1>
       </Container>
     )
   }
