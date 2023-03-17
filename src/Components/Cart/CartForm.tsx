@@ -1,10 +1,11 @@
-import axios from 'axios';
 import React, {Dispatch, SetStateAction} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { url } from '../../data';
+import { url } from '../../API';
+import { useNormalizeProducts } from '../../hooks/useNormalizeProducts';
+import { useSendData } from '../../hooks/useSendData';
 import { clearCart } from '../../redux/productsSlice';
 
 interface Props {
@@ -17,28 +18,18 @@ export const CartForm: React.FC <Props> = ({setFilled}) => {
   const [address, setAddress] = React.useState('');
 
   const productsInCart = useSelector((state: any) => state.product.products);
-  const dispatch = useDispatch();
   const user = useSelector((state: any) => state.auth.user);
-  const normalizedProducts = productsInCart.map((product: any) => {
-    const {id, selectedSize, name, selectedSouse, quantity} = product;
-    return {id, name, selectedSize, selectedSouse, quantity}
-  });
-  const products = JSON.stringify(normalizedProducts);
+  const products = useNormalizeProducts(productsInCart);
+  const dispatch = useDispatch();
+  const { sendData } = useSendData();
 
-  function sendOrder() {
-    axios.post(`${url}/orders`, {name, phone, address, products, email: user.email || null })
-      .then(response => {
-        console.log(response);
-        setName('');
-        setPhone('');
-        setAddress('');
-        setFilled(true);
-        localStorage.setItem('productsInCart', '');
-        dispatch(clearCart());
-      })
-      .catch((e) => {
-        console.log(e)
-      })
+  function submit() {
+    setName('');
+    setPhone('');
+    setAddress('');
+    setFilled(true);
+    localStorage.setItem('productsInCart', '');
+    dispatch(clearCart());
   }
 
   return (
@@ -46,7 +37,7 @@ export const CartForm: React.FC <Props> = ({setFilled}) => {
       className='cartForm' 
       onSubmit={(e) => {
         e.preventDefault();
-        sendOrder();
+        sendData({name, phone, address, products, email: user ? user.email : null }, `${url}/orders`, submit)
       }}
     >
       <Form.Group 
@@ -109,4 +100,3 @@ export const CartForm: React.FC <Props> = ({setFilled}) => {
     </Form>
   );
 };
-

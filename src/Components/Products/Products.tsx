@@ -2,7 +2,7 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import { TypeList } from '../UI/TypeList/TypeList';
 import { useRequest } from '../../hooks/useRequest';
-import { url } from '../../data';
+import { url } from '../../API/index';
 import axios from 'axios';
 import { Loading } from '../UI/Loading/Loading';
 import { Product } from './Product/Product';

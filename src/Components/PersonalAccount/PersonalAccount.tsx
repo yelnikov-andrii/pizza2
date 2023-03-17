@@ -1,9 +1,8 @@
 import axios from 'axios';
-import React from 'react';
 import { Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { url } from '../../data';
+import { url } from '../../API/index';
 import { useRequest } from '../../hooks/useRequest';
 import { LoadingOval } from '../UI/Loading/LoadingOval';
 
@@ -17,7 +16,7 @@ export const PersonalAccount = () => {
       headers:{
         Authorization: `Bearer ${accessToken}`,
       },
-      // withCredentials: true
+      withCredentials: true
     })
   }
 

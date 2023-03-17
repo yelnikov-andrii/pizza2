@@ -1,36 +1,9 @@
 import React from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { setUser } from '../../redux/authSlice';
-import { url } from '../../data';
+import { useActivate } from '../../API/services/Auth/useActivate';
 
-export const Activation = () => {
-  const { activationToken } = useParams();
-  const [isActivated, setIsActivated] = React.useState(false);
-  const [checking, setChecking] = React.useState(false);
-  const [checked, setChecked] = React.useState(false);
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    setChecking(true);
-    axios.get(`${url}/activation/${activationToken}`)
-      .then(response => {
-        console.log(response);
-        dispatch(setUser(response.data.user));
-        localStorage.setItem('accessToken', response.data.accessToken);
-        setIsActivated(true);
-      })
-      .catch((e) => {
-        console.log(e);
-        setIsActivated(false);
-      })
-      .finally(() => {
-        setChecking(false);
-        setChecked(true);
-      })
-  }, []);
+export const Activation: React.FC = () => {
+  const {isActivated, checked, checking} = useActivate();
 
   if (checking) {
     return (

@@ -1,8 +1,3 @@
-
-// export const url = 'http://localhost:5000';
-export const url = 'https://apipizzas.onrender.com';
-
-
 export const blogArr = [{
   name: 'Запрошуємо до літнього майданчику.',
   article: 'Дорогі гості кафе Pizza shop запрошує Вас у затишну обстановку до свойого літнього майданчика серед зелені та декоративних рослин. Тут, у розслаблюючій тиші та спокої, можна насолодитися стравами італійської та японської кухні, а також різними освіжаючими напоями. Майданчик чудово підходить для ділових зустрічей та відпочинку в компанії друзів, сімейних обідів у вихідний день та неспішних вечерь після робочого дня. Також всі страви Ви можете замовити на доставку в нашій службі доставки піци та суші по Харкову.',
@@ -102,3 +97,96 @@ export const contacts = [
   '+3809912345678',
   'pizzashop@gmail.com',
 ];
+
+const email = [
+  {
+    mailto: 'mailto:pizzashop@gmail.com',
+    name: 'pizzashop@gmail.com',
+  }
+];
+
+const address = [
+  {
+    name: 'м.Харків, вул. Героїв Харкова 298',
+    blank: true,
+    link: 'https://goo.gl/maps/WZ9wufaczsi7AFSi7'
+  },
+  {
+    name: 'м.Харків, вул. Велика Кільцева 136-А',
+    blank: true,
+    link: 'https://goo.gl/maps/6j4hGFrotNwsfjLN6'
+  }
+];
+
+const phoneArr = [
+  {
+    name: "+3809312345678"
+  },
+  {
+    name: "+3806712345678",
+  },
+  {
+    name: "+3809912345678"
+  }
+]
+export const contactsArr = [
+  {
+    img: 'https://pizzalife.ua/templates/main/wp-content/uploads/2019/04/demo1-1443275951-1.svg',
+    data: phoneArr,
+  },
+  {
+    img: 'https://pizzalife.ua/templates/main/wp-content/uploads/2019/04/demo1-1235660799-1.svg',
+    data: email
+  },
+  {
+    img: 'https://pizzalife.ua/templates/main/wp-content/uploads/2019/04/demo1-1235715142-1.svg',
+    data: address,
+  }
+];
+
+export const delArr = [
+  "Приймаємо замовлення щоденно з 10:00 до 20:00;",
+  "Термін доставки 60-90 хвилин з моменту прийняття замовлення",
+  " Мінімальне замовлення на доставку від 250 гривень;",
+  "Вартість доставки 50 грн.;",
+  "Постійні акції та знижки;",
+  "Знижки для клієнтів.",
+  "Телефони:",
+  "+3809312345678",
+  "+3806712345678",
+  "+3809912345678"
+];
+
+export const navLinks = [
+  {
+    name: 'Доставка та оплата',
+    url: '/delivery'
+  },
+  {
+    name: 'Блог',
+    url: '/blog'
+  },
+  {
+    name: 'Про компанію',
+    url: '/about'
+  },
+  {
+    name: 'Акції',
+    url: '/discounts'
+  },
+  {
+    name: 'Наші заклади',
+    url: '/places'
+  },
+  {
+    name: 'Вакансії',
+    url: '/vacancies'
+  },
+  {
+    name: 'Контакти',
+    url: '/contacts'
+  }
+];
+export const phones = ['+3809312345678',
+'+3806712345678',
+'+3809912345678',];

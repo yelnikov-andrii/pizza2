@@ -26,7 +26,7 @@ export const FooterListContacts = () => {
             target="_blank"
             rel="noreferrer"
           >
-            м.Харків, вул. Героїв Харкова 296
+            м.Харків, вул. Героїв Харкова 298
           </a>
         </li>
         <li className="footerList__item">

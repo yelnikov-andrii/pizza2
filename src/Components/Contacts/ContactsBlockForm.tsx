@@ -1,8 +1,10 @@
-import { useState } from "react";
+import React from "react";
+import { useChangeBooleanWithTimeSpan } from "../../hooks/useChangeBooleaWithTimespan";
 import { ContactsForm } from "./ContactsForm";
 
-export const ContactsBlockForm = () => {
-  const [formSubmitted, setFormSubmitted] = useState(false);
+export const ContactsBlockForm: React.FC = () => {
+  const [formSubmitted, setFormSubmitted]: any = useChangeBooleanWithTimeSpan(false, false, 3000);
+  console.log(formSubmitted);
 
   return (
     <div className="contactsBlockForm">

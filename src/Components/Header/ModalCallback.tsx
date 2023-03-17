@@ -2,7 +2,9 @@ import React, { Dispatch, SetStateAction} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import axios from 'axios';
+import { useSendData } from '../../hooks/useSendData';
+import { url } from '../../API';
+import { useChangeBooleanWithTimeSpan } from '../../hooks/useChangeBooleaWithTimespan';
 
 interface Props {
   show: boolean;
@@ -13,17 +15,16 @@ export const ModalCallback: React.FC <Props> = ({setShow, show}) => {
   const handleClose = () => setShow(false);
   const [name, setName] = React.useState('');
   const [number, setNumber] = React.useState('');
+  const { sendData } = useSendData();
+  const [sent, setSent]: any = useChangeBooleanWithTimeSpan(false, false, 3000);
 
-  const sendInfo = (name: string, number: string) => {
-    axios.post('https://apipizzas.onrender.com/calls', {name, number})
-      .then(response => {
-        console.log(response)
-        setName('');
-        setNumber('');
-      })
-      .catch((e) => {
-        console.log(e)
-      })
+  function clearForm() {
+    setName('');
+    setNumber('');
+    setSent(true);
+    setTimeout(() => {
+      handleClose()
+    }, 3000);
   }
 
   return (
@@ -37,12 +38,12 @@ export const ModalCallback: React.FC <Props> = ({setShow, show}) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Form 
-          className="contactsForm" 
+        {!sent ? (
+          <Form 
+          className="contactsForm"
           onSubmit={(e) => {
             e.preventDefault();
-            sendInfo(name, number);
-            handleClose();
+            sendData({name, number}, `${url}/calls`, clearForm);
           }}
         >
           <Form.Group 
@@ -86,6 +87,11 @@ export const ModalCallback: React.FC <Props> = ({setShow, show}) => {
             Відправити
           </Button>
         </Form>
+        ): (
+          <div className='contactsForm'>
+            Ми зателефонуємо вам невдовзі, мабуть
+          </div>
+        )}
         </Modal.Body>
       </Modal>
   );

@@ -1,6 +1,6 @@
 import { useRequest } from "./useRequest";
 import axios from "axios";
-import { url } from "../data";
+import { url } from "../API/index";
 
 
 export const useGetMainPageProducts = () => {

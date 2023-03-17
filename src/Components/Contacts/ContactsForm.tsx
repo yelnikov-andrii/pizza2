@@ -2,6 +2,9 @@ import axios from "axios";
 import React, {Dispatch, SetStateAction} from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useEmailHandler } from "../../hooks/useEmailHandler";
+import { useSendData } from "../../hooks/useSendData";
+import { url } from '../../API'
 
 interface Props {
   setFormIsSubmitted: Dispatch<SetStateAction<boolean>>;
@@ -12,46 +15,16 @@ export const ContactsForm: React.FC <Props> = ({setFormIsSubmitted}) => {
   const [number, setNumber] = React.useState('');
   const [message, setMessage] = React.useState('');
   const [email, setEmail] = React.useState('');
-  const [emailError, setEmailError] = React.useState('');
+  const {emailError, emailHandler} = useEmailHandler(setEmail);
+  const [emailIsDirty, setEmailIsDirty] = React.useState(false);
+  const { sendData } = useSendData();
 
-  const regexEmail = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
-
-  function validateEmail(str: string) {
-    if (regexEmail.test(str)) {
-      return ''
-  } else {
-      return 'Email is not valid'
-  }
-  }
-
-  const emailHandler = (str: string) => {
-    setEmail(str);
-    let error = '';
-
-    if (str) {
-      error = validateEmail(str);
-    } 
-
-    if (error) {
-      setEmailError(error)
-    } else {
-      setEmailError('')
-    }
-  }
-
-  function sendData(name: string, number: string, email: string, message: string) {
-    axios.post('https://apipizzas.onrender.com/feedback', {name, number, email, message})
-      .then(response => {
-        console.log(response);
-        setName('');
-        setNumber('');
-        setEmail('');
-        setMessage('');
-        setFormIsSubmitted(true);
-      })
-      .catch((e) => {
-        console.log(e);
-      })
+  function submit() {
+    setName('');
+    setNumber('');
+    setEmail('');
+    setMessage('');
+    setFormIsSubmitted(true);
   }
 
   return (
@@ -59,7 +32,7 @@ export const ContactsForm: React.FC <Props> = ({setFormIsSubmitted}) => {
       className="contactsForm" 
       onSubmit={(e) => {
         e.preventDefault();
-        sendData(name, number, email, message)
+        sendData({name, number, email, message}, `${url}/feedback`, submit)
       }}
     >
       <Form.Group 
@@ -104,7 +77,7 @@ export const ContactsForm: React.FC <Props> = ({setFormIsSubmitted}) => {
       >
         <Form.Label>
           Ваш Email
-          {emailError && (
+          {emailIsDirty && emailError && (
             <p className="contactsForm__emailErrortxt">
               {emailError}
             </p>
@@ -117,7 +90,10 @@ export const ContactsForm: React.FC <Props> = ({setFormIsSubmitted}) => {
           onChange={(e) => {
             emailHandler(e.target.value)
           }}
-          className={emailError ? "contactsForm__emailErrorInput": ''}
+          onBlur={() => {
+            setEmailIsDirty(true)
+          }}
+          className={(emailError && emailIsDirty) ? "contactsForm__emailErrorInput": ''}
         />
       </Form.Group>
       <Form.Group className="contactsForm__textarea">

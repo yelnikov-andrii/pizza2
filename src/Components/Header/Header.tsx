@@ -8,10 +8,8 @@ import Button from 'react-bootstrap/Button';
 import { ModalCallback } from './ModalCallback';
 import { NavLink } from '../../types/types';
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { setUser } from '../../redux/authSlice';
-import axios from 'axios';
-import { url } from '../../data';
+import { navLinks, phones } from '../../data';
+import { useLogout } from '../../API/services/Auth/useLogout';
 
 interface Props {
   count: number;
@@ -19,42 +17,9 @@ interface Props {
 
 export const Header:React.FC<Props> = ({count}) => {
   const [show, setShow] = React.useState(false);
-  const navLinks = [
-    {
-      name: 'Доставка та оплата',
-      url: '/delivery'
-    },
-    {
-      name: 'Блог',
-      url: '/blog'
-    },
-    {
-      name: 'Про компанію',
-      url: '/about'
-    },
-    {
-      name: 'Акції',
-      url: '/discounts'
-    },
-    {
-      name: 'Наші заклади',
-      url: '/places'
-    },
-    {
-      name: 'Вакансії',
-      url: '/vacancies'
-    },
-    {
-      name: 'Контакти',
-      url: '/contacts'
-    }
-  ];
-  const phones = ['+3809312345678',
-  '+3806712345678',
-  '+3809912345678',];
   const accessToken = localStorage.getItem('accessToken');
   const user = useSelector((state: any) => state.auth.user);
-  const dispatch = useDispatch();
+  const { logout } = useLogout();
 
   const handleShow = () => setShow(true);
   return (
@@ -109,24 +74,24 @@ export const Header:React.FC<Props> = ({count}) => {
             >
               Замовити дзвінок
             </Button>
-            {!user && !accessToken ? (
-              <LinkContainer to="login">
-              <Nav.Link>
-                Логін
-              </Nav.Link>
-            </LinkContainer>
+            {!user || !accessToken ? (
+              <>
+                <LinkContainer to="login">
+                <Nav.Link>
+                  Логін
+                </Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="registration">
+                <Nav.Link>
+                  Реєстрація
+                </Nav.Link>
+                </LinkContainer>
+              </>
             ) : (
               <>
               <Nav.Link onClick={(e) => {
                 e.preventDefault();
-                axios.get(`${url}/logout`, {
-                  withCredentials: true
-                })
-                .then(response => {
-                  console.log(response)
-                })
-                dispatch(setUser(null));
-                localStorage.setItem('accessToken', '');
+                logout();
               }}>
                 Вийти
               </Nav.Link>
@@ -158,4 +123,3 @@ export const Header:React.FC<Props> = ({count}) => {
     </Navbar>
   );
 };
-

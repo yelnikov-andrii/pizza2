@@ -5,7 +5,7 @@ import { useRequest } from '../../hooks/useRequest';
 import { Container } from 'react-bootstrap';
 import { LoadingOval } from '../UI/Loading/LoadingOval';
 import { useGetSum } from '../../hooks/useGetSum';
-import { url } from '../../data';
+import { url } from '../../API/index';
 
 export const Order: React.FC <any> = () => {
     const { id } = useParams();
@@ -13,7 +13,7 @@ export const Order: React.FC <any> = () => {
     const [products, setProducts] = React.useState<any[]>([]);
     const [initialProducts, setInitialProducts] = React.useState<any[]>([]);
     const {sum} = useGetSum(products, initialProducts);
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem('accessToken') || '';
 
     function getOrder() {
       return axios.get(`${url}/orders/?id=${id}`, {

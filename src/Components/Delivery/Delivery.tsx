@@ -1,19 +1,8 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
+import { delArr } from '../../data';
 
 export const Delivery = () => {
-  const delArr = [
-    "Приймаємо замовлення щоденно з 10:00 до 20:00;",
-    "Термін доставки 60-90 хвилин з моменту прийняття замовлення",
-    " Мінімальне замовлення на доставку від 250 гривень;",
-    "Вартість доставки 50 грн.;",
-    "Постійні акції та знижки;",
-    "Знижки для клієнтів.",
-    "Телефони:",
-    "+3809312345678",
-    "+3806712345678",
-    "+3809912345678"
-  ];
   return (
     <Container className='delivery'>
       <h1 className='delivery__title'>

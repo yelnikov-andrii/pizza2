@@ -14,7 +14,7 @@ import { ProductCardSizes } from './ProductCardSizes';
 import { ProductCardSouses } from './ProductCardSouses';
 import { ProductCardWeightAndCount } from './ProductCardWeightAndCount';
 import { ProductCardCounter } from './ProductCardCounter';
-import { url } from '../../data';
+import { url } from '../../API/index';
 
 export const ProductCard = () => {
   const { id } = useParams();

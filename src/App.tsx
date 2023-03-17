@@ -10,7 +10,7 @@ import { AppRouter } from './Components/AppRouter/AppRouter';
 import { useGetCountOfProducts } from './hooks/useGetCountOfProducts';
 import axios from 'axios';
 import { setUser } from './redux/authSlice';
-import { url } from './data';
+import { url } from './API';
 
 function App() {
   const productsInCart = useSelector((state: any) => state.product.products);

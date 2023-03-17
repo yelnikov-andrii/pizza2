@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Container } from 'react-bootstrap';
 import axios from 'axios';
-import { url } from '../../data';
+import { url } from '../../API/index';
 
 export const Registration = () => {
   const [email, setEmail] = React.useState('');
