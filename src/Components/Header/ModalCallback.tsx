@@ -23,77 +23,76 @@ export const ModalCallback: React.FC <Props> = ({setShow, show}) => {
     setNumber('');
     setSent(true);
     setTimeout(() => {
-      handleClose()
+      handleClose();
     }, 3000);
   }
 
   return (
-      <Modal 
-        show={show} 
-        onHide={handleClose}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>
-            Замовити дзвінок
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+    <Modal 
+      show={show} 
+      onHide={handleClose}
+    >
+      <Modal.Header closeButton>
+        <Modal.Title>
+          Замовити дзвінок
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         {!sent ? (
           <Form 
-          className="contactsForm"
-          onSubmit={(e) => {
-            e.preventDefault();
-            sendData({name, number}, `${url}/calls`, clearForm);
-          }}
-        >
-          <Form.Group 
-            className="mb-3" 
-            controlId="formBasicName"
+            className="contactsForm"
+            onSubmit={(e) => {
+              e.preventDefault();
+              sendData({name, number}, `${url}/calls`, clearForm);
+            }}
           >
-            <Form.Label>
-              Ім'я
-            </Form.Label>
-            <Form.Control 
-              type="text" 
-              placeholder="Ім'я"
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-            />
-          </Form.Group>
-          <Form.Group 
-            className="mb-3" 
-            controlId="formBasicPhone"
-          >
-            <Form.Label>
-              Телефон
-            </Form.Label>
-            <Form.Control 
-              type="phone"
-              placeholder="Телефон"
-              value={number}
-              onChange={(e) => {
-                if (!isNaN(+e.target.value)) {
-                  setNumber(e.target.value);
-                }
-              }}
-            />
-          </Form.Group>
-          <Button 
-            variant="primary" 
-            type="submit"
-          >
-            Відправити
-          </Button>
-        </Form>
+            <Form.Group 
+              className="mb-3" 
+              controlId="formBasicName"
+            >
+              <Form.Label>
+                Ім'я
+              </Form.Label>
+              <Form.Control 
+                type="text" 
+                placeholder="Ім'я"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
+            </Form.Group>
+            <Form.Group 
+              className="mb-3" 
+              controlId="formBasicPhone"
+            >
+              <Form.Label>
+                Телефон
+              </Form.Label>
+              <Form.Control 
+                type="phone"
+                placeholder="Телефон"
+                value={number}
+                onChange={(e) => {
+                  if (!isNaN(+e.target.value)) {
+                    setNumber(e.target.value);
+                  }
+                }}
+              />
+            </Form.Group>
+            <Button 
+              variant="primary" 
+              type="submit"
+            >
+              Відправити
+            </Button>
+          </Form>
         ): (
           <div className='contactsForm'>
             Ми зателефонуємо вам невдовзі, мабуть
           </div>
         )}
-        </Modal.Body>
-      </Modal>
+      </Modal.Body>
+    </Modal>
   );
 };
-
