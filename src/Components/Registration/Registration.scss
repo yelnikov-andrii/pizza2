@@ -29,5 +29,17 @@
 
   &__error {
     color: red;
+    font-weight: 700;
+    margin-top: 5px;
+  }
+
+  &__input {
+    &--error {
+      &.form-control {
+        color: red;
+      border-color: red;
+      box-shadow: red;
+      }
+    }
   }
 }

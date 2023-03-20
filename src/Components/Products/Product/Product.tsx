@@ -9,7 +9,12 @@ import { ProductSizes } from './ProductSizes';
 import { ProductSouses } from './ProductSouses';
 import { ProductButtonAdd } from './ProductButtonAdd';
 
-export const Product: React.FC <any> = ({ product, link }) => {
+interface Props {
+  product: any;
+  link?: string;
+}
+
+export const Product: React.FC <Props> = ({ product, link }) => {
   const [selectedSize, setSelectedSize] = React.useState<number>(0);
   const [selectedSouse, setSelectedSouse] = React.useState<number>(0);
   const { show, showAlert } = useAlert();
@@ -55,10 +60,10 @@ export const Product: React.FC <any> = ({ product, link }) => {
         )}
         {product.prices && (
           <Card.Text >
-          <strong className='product__price'>
-            {`${product.prices[selectedSize]} грн.`}
-          </strong>
-        </Card.Text>
+            <strong className='product__price'>
+              {`${product.prices[selectedSize]} грн.`}
+            </strong>
+          </Card.Text>
         )}
         <ProductButtonAdd
           product={product}
@@ -72,4 +77,4 @@ export const Product: React.FC <any> = ({ product, link }) => {
       </Card.Body>
     </Card>
   );
-}
+};

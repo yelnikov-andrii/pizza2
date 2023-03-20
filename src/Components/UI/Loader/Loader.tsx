@@ -10,7 +10,7 @@ export const Loader = () => {
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
         className='loader__content'
-        >
+      >
         <rect x="129" y="16" rx="0" ry="0" width="310" height="210" /> 
         <rect x="132" y="237" rx="0" ry="0" width="170" height="20" /> 
         <rect x="131" y="267" rx="0" ry="0" width="55" height="30" /> 
@@ -26,7 +26,7 @@ export const Loader = () => {
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
         className='loader__content'
-        >
+      >
         <rect x="129" y="16" rx="0" ry="0" width="310" height="210" /> 
         <rect x="132" y="237" rx="0" ry="0" width="170" height="20" /> 
         <rect x="131" y="267" rx="0" ry="0" width="55" height="30" /> 
@@ -42,7 +42,7 @@ export const Loader = () => {
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
         className='loader__content'
-        >
+      >
         <rect x="129" y="16" rx="0" ry="0" width="310" height="210" /> 
         <rect x="132" y="237" rx="0" ry="0" width="170" height="20" /> 
         <rect x="131" y="267" rx="0" ry="0" width="55" height="30" /> 

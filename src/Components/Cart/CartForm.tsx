@@ -12,7 +12,7 @@ interface Props {
   setFilled: Dispatch<SetStateAction<boolean>>;
 }
 
-export const CartForm: React.FC <Props> = ({setFilled}) => {
+export const CartForm: React.FC <Props> = ({ setFilled }) => {
   const[name, setName] = React.useState('');
   const [phone, setPhone] = React.useState('');
   const [address, setAddress] = React.useState('');
@@ -37,7 +37,7 @@ export const CartForm: React.FC <Props> = ({setFilled}) => {
       className='cartForm' 
       onSubmit={(e) => {
         e.preventDefault();
-        sendData({name, phone, address, products, email: user ? user.email : null }, `${url}/orders`, submit)
+        sendData({name, phone, address, products, email: user ? user.email : null }, `${url}/orders`, submit);
       }}
     >
       <Form.Group 
@@ -70,7 +70,9 @@ export const CartForm: React.FC <Props> = ({setFilled}) => {
           placeholder="Телефон" 
           value={phone} 
           onChange={(e) => {
-            setPhone(e.target.value)
+            if (!isNaN(+e.target.value)) {
+              setPhone(e.target.value);
+            }
           }}
         />
       </Form.Group>

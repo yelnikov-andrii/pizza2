@@ -21,8 +21,19 @@
     }
   }
 
+  &__input {
+    &--error {
+      &.form-control {
+        color: red;
+      border-color: red;
+      box-shadow: red;
+      }
+    }
+  }
+
   &__error {
     color: red;
+    font-weight: 700;
   }
 
   &__unauthorized {

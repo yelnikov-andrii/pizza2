@@ -7,5 +7,5 @@ export const Vacancy: React.FC <any> = ({vacancy}) => {
         {vacancy.name}
       </p>
     </div>
-  )
-}
+  );
+};

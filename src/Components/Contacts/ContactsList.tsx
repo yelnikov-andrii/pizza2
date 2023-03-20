@@ -1,5 +1,5 @@
-import React from "react";
-import { Data, DataItem } from "../../types/types";
+import React from 'react';
+import { Data, DataItem } from '../../types/types';
 
 interface Props {
   data: Data;
@@ -20,13 +20,13 @@ export const ContactsList: React.FC <Props> = ({ data }) => {
           </li>
         ))
       ) : data[0].hasOwnProperty('mailto') ? (
-          data.map((item: DataItem) => (
-            <li className="contactsList__item" key={item.name}>
-              <a className="contactsList__link" href={item.mailto}>
-                {data[0].name}
-              </a>
-            </li>
-          ))
+        data.map((item: DataItem) => (
+          <li className="contactsList__item" key={item.name}>
+            <a className="contactsList__link" href={item.mailto}>
+              {data[0].name}
+            </a>
+          </li>
+        ))
       ) : (
         data.map((item: DataItem) => (
           <li className="contactsList__item" key={item.name} >
@@ -42,5 +42,5 @@ export const ContactsList: React.FC <Props> = ({ data }) => {
         ))
       )}
     </ul>
-  )
-}
+  );
+};

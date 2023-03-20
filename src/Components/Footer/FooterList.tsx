@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
-import { Category } from "../../types/types";
+import { Link } from 'react-router-dom';
+import { Category } from '../../types/types';
 
 type Props = {
   arr: Category[];
 }
 
-export const FooterList: React.FC <Props> = ({arr}) => {
+export const FooterList: React.FC <Props> = ({ arr }) => {
   return (
     <ul className="footerList">
       {arr.map((item: Category) => (
@@ -22,5 +22,6 @@ export const FooterList: React.FC <Props> = ({arr}) => {
         </li>
       ))}
     </ul>
-  )
-}
+  );
+};
+

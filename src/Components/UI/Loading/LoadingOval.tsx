@@ -5,9 +5,9 @@ export const LoadingOval = () => {
   return (
     <div>
       <h1>
-      Завантаження...
-    </h1>
-    <Oval
+        Завантаження...
+      </h1>
+      <Oval
         height={40}
         width={40}
         color="#4fa94d"

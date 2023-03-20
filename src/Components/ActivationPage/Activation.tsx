@@ -12,7 +12,7 @@ export const Activation: React.FC = () => {
           Loading...
         </h2>
       </Container>
-    )
+    );
   } else {
     return (
       <Container className='activation'>
@@ -29,4 +29,3 @@ export const Activation: React.FC = () => {
     );
   }
 };
-

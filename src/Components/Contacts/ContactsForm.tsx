@@ -1,16 +1,15 @@
-import axios from "axios";
-import React, {Dispatch, SetStateAction} from "react";
+import React, {Dispatch, SetStateAction} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useEmailHandler } from "../../hooks/useEmailHandler";
-import { useSendData } from "../../hooks/useSendData";
-import { url } from '../../API'
+import { useEmailHandler } from '../../hooks/useEmailHandler';
+import { useSendData } from '../../hooks/useSendData';
+import { url } from '../../API';
 
 interface Props {
   setFormIsSubmitted: Dispatch<SetStateAction<boolean>>;
 }
 
-export const ContactsForm: React.FC <Props> = ({setFormIsSubmitted}) => {
+export const ContactsForm: React.FC <Props> = ({ setFormIsSubmitted }) => {
   const [name, setName] = React.useState('');
   const [number, setNumber] = React.useState('');
   const [message, setMessage] = React.useState('');
@@ -32,7 +31,7 @@ export const ContactsForm: React.FC <Props> = ({setFormIsSubmitted}) => {
       className="contactsForm" 
       onSubmit={(e) => {
         e.preventDefault();
-        sendData({name, number, email, message}, `${url}/feedback`, submit)
+        sendData({name, number, email, message}, `${url}/feedback`, submit);
       }}
     >
       <Form.Group 
@@ -48,7 +47,7 @@ export const ContactsForm: React.FC <Props> = ({setFormIsSubmitted}) => {
           required
           value={name}
           onChange={(e) => {
-            setName(e.target.value)
+            setName(e.target.value);
           }}
         />
       </Form.Group>
@@ -88,24 +87,24 @@ export const ContactsForm: React.FC <Props> = ({setFormIsSubmitted}) => {
           placeholder="Enter email"
           value={email}
           onChange={(e) => {
-            emailHandler(e.target.value)
+            emailHandler(e.target.value);
           }}
           onBlur={() => {
-            setEmailIsDirty(true)
+            setEmailIsDirty(true);
           }}
-          className={(emailError && emailIsDirty) ? "contactsForm__emailErrorInput": ''}
+          className={(emailError && emailIsDirty) ? 'contactsForm__emailErrorInput' : ''}
         />
       </Form.Group>
       <Form.Group className="contactsForm__textarea">
-      <Form.Label>
-        Повідомлення
-      </Form.Label>
+        <Form.Label>
+          Повідомлення
+        </Form.Label>
         <Form.Control 
           as="textarea" 
           aria-label="With textarea"
           value={message}
           onChange={(e) => {
-            setMessage(e.target.value)
+            setMessage(e.target.value);
           }}
         />
       </Form.Group>
@@ -117,4 +116,4 @@ export const ContactsForm: React.FC <Props> = ({setFormIsSubmitted}) => {
       </Button>
     </Form>
   );
-}
+};

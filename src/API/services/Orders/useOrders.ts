@@ -19,9 +19,9 @@ export const useOrders = () => {
     setOrdersLoading(true);
     axios.get(`${url}/orders/?email=${user.email}`, {
       headers:{
-              Authorization: `Bearer ${accessToken}`,
-            },
-            withCredentials: true
+        Authorization: `Bearer ${accessToken}`,
+      },
+      withCredentials: true,
     })
       .then(response => {
         setOrders(response.data);
@@ -29,36 +29,42 @@ export const useOrders = () => {
       .catch( (e) => {
         if (e.response.status === 401) {
           refresh()
-          .then(() => {
-            const accessToken = localStorage.getItem('accessToken');
-            axios.get(`${url}/orders/?email=${user.email}`, {
-              headers:{
-                      Authorization: `Bearer ${accessToken}`,
-                    },
-                    withCredentials: true
-            })
-            .then(response => {
-              setOrders(response.data)
-              setOrdersLoading(true);
-            })
-            .catch((e) => {
-              if (e.response.status === 401) {
-                dispatch(setUser(null));
-                localStorage.setItem('accessToken', '');
-              }
-              setOrdersError(e.response.data.message);
-              setOrdersLoading(false);
-            })
-            .finally(() => {
-              setOrdersLoading(false)
-            })
-          })
+            .then(() => {
+              const accessToken = localStorage.getItem('accessToken');
+              axios.get(`${url}/orders/?email=${user.email}`, {
+                headers:{
+                  Authorization: `Bearer ${accessToken}`,
+                },
+                withCredentials: true,
+              })
+                .then(response => {
+                  setOrders(response.data);
+                  setOrdersLoading(true);
+                })
+                .catch((e) => {
+                  if (e.response.status === 401) {
+                    dispatch(setUser(null));
+                    localStorage.setItem('accessToken', '');
+                  }
+                  setOrdersError(e.response.data.message);
+                  setOrdersLoading(false);
+                })
+                .finally(() => {
+                  setOrdersLoading(false);
+                });
+            });
         }
       })
       .finally(() => {
         setOrdersLoading(false);
-      })
+      });
   }, []);
 
-  return { orders, ordersError, ordersLoading };
-}
+  const ordersNormalized = orders.map((order: any) => {
+    const date = new Date(order.createdAt);
+    const newOrder = {...order, createdAt: date};
+    return newOrder;
+  });
+
+  return { ordersNormalized, ordersError, ordersLoading };
+};

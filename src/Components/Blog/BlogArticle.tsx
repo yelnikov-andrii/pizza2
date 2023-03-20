@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Blog } from "../../types/types";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Blog } from '../../types/types';
 
 interface Props {
   blog: Blog;
@@ -26,5 +26,5 @@ export const BlogArticle: React.FC <Props> = ({blog}) => {
         Читати далі
       </Link>
     </div>
-  )
-}
+  );
+};

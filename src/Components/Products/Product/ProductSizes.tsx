@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-export const ProductSizes: React.FC <any> = ( {product, selectedSize, setSelectedSize }) => {
+interface Props {
+  product: any;
+  selectedSize: number;
+  setSelectedSize: Dispatch<SetStateAction<number>>;
+}
+
+export const ProductSizes: React.FC <Props> = ( {product, selectedSize, setSelectedSize }) => {
   return (
     <Card.Text>
       <Button 
@@ -12,7 +18,7 @@ export const ProductSizes: React.FC <any> = ( {product, selectedSize, setSelecte
         className="product__button"
         onClick={(e) => {
           e.preventDefault();
-          setSelectedSize(0)
+          setSelectedSize(0);
         }}
       >
         <strong
@@ -33,12 +39,12 @@ export const ProductSizes: React.FC <any> = ( {product, selectedSize, setSelecte
         active={selectedSize === 1 ? true : false}
         onClick={(e) => {
           e.preventDefault();
-          setSelectedSize(1)
+          setSelectedSize(1);
         }}
       >
-      <strong className='product__txtStrong'>
-        42 см
-      </strong>
+        <strong className='product__txtStrong'>
+          42 см
+        </strong>
         <span className='product__txt'>
           {`(${product.sizes[1]} г.)`}
         </span>
@@ -46,4 +52,3 @@ export const ProductSizes: React.FC <any> = ( {product, selectedSize, setSelecte
     </Card.Text>
   );
 };
-

@@ -5,7 +5,7 @@ interface Props {
   contact: Contact;
 }
 
-export const ContactsBlockItem: React.FC <Props> = ({contact}) => {
+export const ContactsBlockItem: React.FC <Props> = ({ contact }) => {
   return (
     <div className="contactsBlockItem">
       <img 
@@ -15,5 +15,5 @@ export const ContactsBlockItem: React.FC <Props> = ({contact}) => {
       />
       <ContactsList data={contact.data} />
     </div>
-  )
-}
+  );
+};

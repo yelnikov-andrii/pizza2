@@ -20,12 +20,12 @@ export const ProductCardWeightAndCount: React.FC <any> = ({product}) => {
             </strong>
             {product.count && (
               <span className='product__txt'>
-              {`(${product.count} шт.)`}
-            </span>
+                {`(${product.count} шт.)`}
+              </span>
             )}
           </Button>
         </Card.Text>
-    )}
+      )}
     </>
   );
 };

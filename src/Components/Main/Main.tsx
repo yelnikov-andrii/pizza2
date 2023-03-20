@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import { categoriesArr } from '../../data';
+import { categoriesArr } from '../../utils/data';
 import { MainProduct } from './MainProduct';
 import Categories from './Categories';
 import { useGetMainPageProducts } from '../../hooks/useGetMainPageProducts';

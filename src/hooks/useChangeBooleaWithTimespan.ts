@@ -11,4 +11,4 @@ export const useChangeBooleanWithTimeSpan = (booleanDefault: boolean, booleanToS
   }, [boolean]);
 
   return [boolean, setBoolean];
-}
+};

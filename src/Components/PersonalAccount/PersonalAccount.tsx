@@ -5,7 +5,7 @@ import { LoadingOval } from '../UI/Loading/LoadingOval';
 import { useOrders } from '../../API/services/Orders/useOrders';
 
 export const PersonalAccount = () => {
-  const { orders, ordersError, ordersLoading } = useOrders();
+  const { ordersNormalized, ordersError, ordersLoading } = useOrders();
 
   if (ordersError) {
     return (
@@ -14,7 +14,7 @@ export const PersonalAccount = () => {
           Error {ordersError}
         </p>
       </Container>
-    )
+    );
   }
 
   return (
@@ -23,18 +23,19 @@ export const PersonalAccount = () => {
         Особистий кабінет
       </h1>
       <h5 className='personalAccount__ordersTitle'>
-        {orders && orders.length > 0 ? 'Ваші замовлення' : ordersLoading === true ? 'Завантаження' : 'Замовлень немає'}
+        {ordersNormalized && ordersNormalized.length > 0 
+          ? 'Ваші замовлення' : ordersLoading === true ? 'Завантаження' : 'Замовлень немає'}
       </h5>
       {ordersLoading === true ? (
         <LoadingOval />
       ) : (
         <div>
-        {orders && orders.map((order: any) => (
-          <Link to={`orders/${order.id.toString()}`} key={order.id}>
-            <p>Дата замовлення: {order.createdAt}</p>
-          </Link>
-        ))}
-      </div>
+          {ordersNormalized && ordersNormalized.map((order: any) => (
+            <Link to={`orders/${order.id.toString()}`} key={order.id}>
+              <p>Дата замовлення: {order.createdAt.toUTCString().slice(0, -4)}</p>
+            </Link>
+          ))}
+        </div>
       )}
     </Container>
   );

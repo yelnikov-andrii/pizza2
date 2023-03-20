@@ -9,25 +9,25 @@ interface Props {
 export const CardComponents: React.FC <Props> = ({components}) => {
   return (
     <>
-        <OverlayTrigger
-          trigger="click"
-          placement='bottom-start'
-          overlay={
-            <Popover>
-              <Popover.Header as="h3"></Popover.Header>
-              <Popover.Body 
-                className="cardComponents">
-                <strong>Склад:</strong> {components}
-              </Popover.Body>
-            </Popover>
-          }
-        >
-          <Button 
-            variant="outline-secondary" 
-            style={{margin: '0 0 20px 0'}}>
-              Склад
-          </Button>
-        </OverlayTrigger>
+      <OverlayTrigger
+        trigger="click"
+        placement='bottom-start'
+        overlay={
+          <Popover>
+            <Popover.Header as="h3"></Popover.Header>
+            <Popover.Body 
+              className="cardComponents">
+              <strong>Склад:</strong> {components}
+            </Popover.Body>
+          </Popover>
+        }
+      >
+        <Button 
+          variant="outline-secondary" 
+          style={{margin: '0 0 20px 0'}}>
+            Склад
+        </Button>
+      </OverlayTrigger>
     </>
   );
 };

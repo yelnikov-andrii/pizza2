@@ -5,10 +5,10 @@ import { Loader } from '../Loader/Loader';
 export const Loading = () => {
   return (
     <div>
-    <h1>
-      Завантаження...
-    </h1>
-    <Oval
+      <h1>
+        Завантаження...
+      </h1>
+      <Oval
         height={40}
         width={40}
         color="#4fa94d"
@@ -23,7 +23,7 @@ export const Loading = () => {
       <div className="pizzas__block">
         <Loader />
       </div>
-  </div>
+    </div>
   );
 };
 

@@ -1,9 +1,9 @@
+import { setUser } from '../../../redux/authSlice';
+import { url } from '../../';
 import React from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../../redux/authSlice';
-import { url } from '../../';
 
 export const useActivate = () => {
   const { activationToken } = useParams();
@@ -26,8 +26,8 @@ export const useActivate = () => {
       .finally(() => {
         setChecking(false);
         setChecked(true);
-      })
+      });;
   }, []);
 
   return {isActivated, checked, checking};
-}
+};

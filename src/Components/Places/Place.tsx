@@ -1,6 +1,15 @@
-import React from "react";
+import React from 'react';
 
-export const Place: React.FC <any> = ({place}) => {
+interface PlaceInterface {
+  name: string;
+  img: string;
+}
+
+interface Props {
+  place: PlaceInterface
+}
+
+export const Place: React.FC <Props> = ({ place }) => {
   return (
     <div className="place" key={place.name}>
       <img src={place.img} alt="" className="place__img"/>
@@ -8,5 +17,5 @@ export const Place: React.FC <any> = ({place}) => {
         {place.name}
       </p>
     </div>
-  )
-}
+  );
+};

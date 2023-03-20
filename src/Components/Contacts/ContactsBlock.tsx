@@ -1,5 +1,5 @@
-import { ContactsBlockItem } from "./ContactsBlockItem";
-import { contactsArr } from "../../data";
+import { ContactsBlockItem } from './ContactsBlockItem';
+import { contactsArr } from '../../utils/data';
 
 export const ContactsBlock = () => {
   return (
@@ -8,5 +8,5 @@ export const ContactsBlock = () => {
       <ContactsBlockItem contact={contactsArr[1]}/>
       <ContactsBlockItem contact={contactsArr[2]}/>
     </div>
-  )
-}
+  );
+};

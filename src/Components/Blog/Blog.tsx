@@ -1,27 +1,27 @@
-import { Route, Routes } from "react-router-dom";
-import { BlogItem } from "./BlogItem";
+import { Route, Routes } from 'react-router-dom';
+import { BlogItem } from './BlogItem';
 import { BlogArticle } from './BlogArticle';
-import { blogArr } from "../../data";
+import { blogArr } from '../../utils/data';
 
 export const Blog = () => {
 
   return (
     <Routes>
       <Route 
-        path="" 
+        path='' 
         element={
-        <section className="blog">
-          <div className="container">
-            <h1 className="blog__title">
-              Блог
-            </h1>
-            <div className="blog__block">
-            {blogArr.map(blog => (
-              <BlogArticle blog={blog} key={blog.article} />
-            ))}
+          <section className='blog'>
+            <div className='container'>
+              <h1 className='blog__title'>
+                Блог
+              </h1>
+              <div className='blog__block'>
+                {blogArr.map(blog => (
+                  <BlogArticle blog={blog} key={blog.article} />
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
         }
       >
       </Route>
@@ -36,6 +36,5 @@ export const Blog = () => {
         </Route>
       ))}
     </Routes>
-  )
-}
-
+  );
+};

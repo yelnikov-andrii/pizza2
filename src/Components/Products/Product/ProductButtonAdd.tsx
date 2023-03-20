@@ -3,7 +3,14 @@ import Button from 'react-bootstrap/Button';
 import { useSelector } from 'react-redux';
 import { useAddProduct } from '../../../hooks/useAddProduct';
 
-export const ProductButtonAdd: React.FC <any> = ({ product, selectedSize, selectedSouse, showAlert }) => {
+interface Props {
+  product: any;
+  selectedSize: number;
+  selectedSouse: number;
+  showAlert: () => void;
+}
+
+export const ProductButtonAdd: React.FC <Props> = ({ product, selectedSize, selectedSouse, showAlert }) => {
   const productsInCart = useSelector((state: any) => state.product.products);
   const { add } = useAddProduct(product, selectedSize, selectedSouse, showAlert, productsInCart, 1, false);
 

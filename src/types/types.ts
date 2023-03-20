@@ -31,3 +31,14 @@ export interface Category {
   id: number;
   link: string;
 }
+
+export interface UserAuth {
+  email: string;
+  password: string;
+}
+
+export interface Product {
+  name: string;
+  id: number;
+  
+}

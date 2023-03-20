@@ -4,7 +4,14 @@ import Button from 'react-bootstrap/Button';
 import { useSelector } from 'react-redux';
 import { useAddProduct } from '../../hooks/useAddProduct';
 
-export const ProductCardCounter: React.FC <any> = ({product, selectedSize, selectedSouse, showAlert}) => {
+interface Props {
+  product: any;
+  selectedSize: number;
+  selectedSouse: number;
+  showAlert: () => void;
+}
+
+export const ProductCardCounter: React.FC <Props> = ({product, selectedSize, selectedSouse, showAlert}) => {
   const [quantity, setQuantity] = React.useState(1);
   const productsInCart = useSelector((state: any) => state.product.products);
   const { add } = useAddProduct(product, selectedSize, selectedSouse, showAlert, productsInCart, quantity, true);
@@ -46,7 +53,7 @@ export const ProductCardCounter: React.FC <any> = ({product, selectedSize, selec
         variant='warning'
         onClick={(e) => {
           e.preventDefault();
-          add()
+          add();
         }}
       >
         <strong>

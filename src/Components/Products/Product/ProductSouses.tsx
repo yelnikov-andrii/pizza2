@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import classnames from 'classnames';
 
-export const ProductSouses: React.FC <any> = ({product, selectedSouse, setSelectedSouse}) => {
+interface Props {
+  product: any;
+  selectedSouse: number;
+  setSelectedSouse: Dispatch<SetStateAction<number>>;
+}
+
+export const ProductSouses: React.FC <Props> = ({product, selectedSouse, setSelectedSouse}) => {
   return (
     <Card.Text>
       <Button
@@ -11,7 +17,7 @@ export const ProductSouses: React.FC <any> = ({product, selectedSouse, setSelect
         size="sm"
         active={selectedSouse === 0 ? true : false}
         className={classnames('product__button', {
-          "product__button--hidden": product.souses.length === 0
+          'product__button--hidden': product.souses.length === 0,
         })}
         onClick={(e) => {
           e.preventDefault();
@@ -33,9 +39,9 @@ export const ProductSouses: React.FC <any> = ({product, selectedSouse, setSelect
           }}
           active={selectedSouse === 1 ? true : false}
         >
-        <strong className='product__txtStrong'>
-          {product.souses[1]}
-        </strong>
+          <strong className='product__txtStrong'>
+            {product.souses[1]}
+          </strong>
         </Button>
       )}
     </Card.Text>

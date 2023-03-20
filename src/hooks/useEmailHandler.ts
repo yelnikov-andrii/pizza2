@@ -7,19 +7,20 @@ export const useEmailHandler = (setEmail: Dispatch<SetStateAction<string>>) => {
 
   function validateEmail(str: string) {
     if (!str) {
-      return 'Email can not be empty'
+      return 'Email can not be empty';
     }
     if (regexEmail.test(str)) {
-      return ''
-  } else {
-      return 'Email is not valid'
-  }
+      return '';
+    } else {
+      return 'Email is not valid';
+    }
   }
 
   const emailHandler = (str: string) => {
+    setEmailError('');
     setEmail(str);
     setEmailError(validateEmail(str));
-  }
+  };
 
-  return {emailHandler, emailError}
-}
+  return {emailHandler, emailError};
+};

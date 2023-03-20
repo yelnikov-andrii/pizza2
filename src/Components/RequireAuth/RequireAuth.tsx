@@ -10,7 +10,7 @@ export const RequireAuth: React.FC<any> = ({ children }) => {
   if (!user || !accessToken) {
     return (
       <Navigate to="/login" state={{ from: location }} />
-    )
+    );
   }
 
   return children;

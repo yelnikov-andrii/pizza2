@@ -1,21 +1,21 @@
-import { About } from "../Components/About/About";
-import { Blog } from "../Components/Blog/Blog";
-import { Cart } from "../Components/Cart/Cart";
-import { Contacts } from "../Components/Contacts/Contacts";
-import { Delivery } from "../Components/Delivery/Delivery";
-import { Discounts } from "../Components/Discounts/Discounts";
-import { Login } from "../Components/Login/Login";
-import { Main } from "../Components/Main/Main"
-import { Places } from "../Components/Places/Places";
-import { Vacancies } from "../Components/Vacancies/Vacancies";
-import { Registration } from "../Components/Registration/Registration";
-import { PageNotFound } from "../Components/PageNotFound/PageNotFound";
-import { Activation } from "../Components/ActivationPage/Activation";
-import { PersonalAccount } from "../Components/PersonalAccount/PersonalAccount";
-import { Products } from "../Components/Products/Products";
-import { ProductCard } from "../Components/ProductCard/ProductCard";
-import { Order } from "../Components/PersonalAccount/Order";
-import { RequireAuth } from "../Components/RequireAuth/RequireAuth";
+import { About } from '../Components/About/About';
+import { Blog } from '../Components/Blog/Blog';
+import { Cart } from '../Components/Cart/Cart';
+import { Contacts } from '../Components/Contacts/Contacts';
+import { Delivery } from '../Components/Delivery/Delivery';
+import { Discounts } from '../Components/Discounts/Discounts';
+import { Login } from '../Components/Login/Login';
+import { Main } from '../Components/Main/Main';
+import { Places } from '../Components/Places/Places';
+import { Vacancies } from '../Components/Vacancies/Vacancies';
+import { Registration } from '../Components/Registration/Registration';
+import { PageNotFound } from '../Components/PageNotFound/PageNotFound';
+import { Activation } from '../Components/ActivationPage/Activation';
+import { PersonalAccount } from '../Components/PersonalAccount/PersonalAccount';
+import { Products } from '../Components/Products/Products';
+import { ProductCard } from '../Components/ProductCard/ProductCard';
+import { Order } from '../Components/PersonalAccount/Order';
+import { RequireAuth } from '../Components/RequireAuth/RequireAuth';
 
 interface Route {
   path: string;
@@ -34,12 +34,12 @@ export const routes: Route[] = [
       typeId={1} 
       productCategories={['Усі', 'Сирні', 'М\'ясні', 'Овочеві', 'Фірмові', 'Морські']}
       name="Піца"
-    />
+    />,
   },
   {
     path: '/pizzas/:id',
     component: 
-    <ProductCard />
+    <ProductCard />,
   },
   {
     path: '/sushi',
@@ -48,12 +48,12 @@ export const routes: Route[] = [
       typeId={2}
       productCategories={['Усі', 'Суші-сети', 'Cуші', 'Гункани', 'Роли', 'Теплі Роли']}
       name="Суші"
-    />
+    />,
   },
   {
     path: '/sushi/:id',
     component: 
-    <ProductCard />
+    <ProductCard />,
   },
   {
     path: '/shaurma',
@@ -62,12 +62,12 @@ export const routes: Route[] = [
       typeId={3}
       productCategories={[]}
       name="Шаурма"
-    />
+    />,
   },
   {
     path: '/shaurma/:id',
     component: 
-    <ProductCard />
+    <ProductCard />,
   },
   {
     path: '/salads',
@@ -76,12 +76,12 @@ export const routes: Route[] = [
       typeId={4}
       productCategories={[]}
       name="Салати"
-    />
+    />,
   },
   {
     path: '/salads/:id',
     component: 
-    <ProductCard />
+    <ProductCard />,
   },
   {
     path: '/mangal',
@@ -90,97 +90,97 @@ export const routes: Route[] = [
       typeId={5}
       productCategories={[]}
       name="Мангал"
-    />
+    />,
   },
   {
     path: '/mangal/:id',
     component: 
-    <ProductCard />
+    <ProductCard />,
   },
   {
     path: '/snacks',
     component: 
     <Products 
       typeId={6}
-      productCategories={['Усі', 'Холодні закуски', 'До пива',]}
+      productCategories={['Усі', 'Холодні закуски', 'До пива']}
       name="Закуски"
-    />
+    />,
   },
   {
     path: '/snacks/:id',
     component: 
-    <ProductCard />
+    <ProductCard />,
   },
   {
     path: '/soupes',
     component: 
     <Products 
       typeId={7}
-      productCategories={['Усі', 'Японські супи', 'Перші страви',]}
+      productCategories={['Усі', 'Японські супи', 'Перші страви']}
       name="Супи"
-    />
+    />,
   },
   {
     path: '/soupes/:id',
     component: 
-    <ProductCard />
+    <ProductCard />,
   },
   {
     path: '/cart',
-    component: <Cart />
+    component: <Cart />,
   },
   {
     path: '/delivery',
-    component: <Delivery />
+    component: <Delivery />,
   },
   {
     path: '/blog/*',
-    component: <Blog />
+    component: <Blog />,
   },
   {
     path: '/about',
-    component: <About />
+    component: <About />,
   },
   {
     path: '/discounts',
-    component: <Discounts />
+    component: <Discounts />,
   },
   {
     path: '/places',
-    component: <Places />
+    component: <Places />,
   },
   {
     path: '/vacancies',
-    component: <Vacancies />
+    component: <Vacancies />,
   },
   {
     path: '/contacts',
-    component: <Contacts />
+    component: <Contacts />,
   },
   {
     path: '/login',
-    component: <Login />
+    component: <Login />,
   },
   {
     path: '/registration',
-    component: <Registration />
+    component: <Registration />,
   },
   {
     path: '/activation/:activationToken',
-    component: <Activation />
+    component: <Activation />,
   },
   {
     path: '/personal-account',
     component: <RequireAuth>
       <PersonalAccount />
-    </RequireAuth>
+    </RequireAuth>,
   },
   {
     path: '/personal-account/orders/:id',
-    component: <Order  />
+    component: <Order  />,
   },
   {
     path: '/*',
-    component: <PageNotFound />
+    component: <PageNotFound />,
   },
 ];

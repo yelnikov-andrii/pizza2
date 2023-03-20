@@ -13,5 +13,5 @@ export const Discounts = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

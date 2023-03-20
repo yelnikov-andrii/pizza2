@@ -32,7 +32,7 @@ export const Categories: React.FC <Props> = ({arr}) => {
       </Container>
     </Navbar>
   );
-}
+};
 
 export default Categories;
 

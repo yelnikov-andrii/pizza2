@@ -1,6 +1,6 @@
-import { useRequest } from "./useRequest";
-import axios from "axios";
-import { url } from "../API/index";
+import { useRequest } from './useRequest';
+import axios from 'axios';
+import { url } from '../API/index';
 
 
 export const useGetMainPageProducts = () => {
@@ -33,7 +33,7 @@ export const useGetMainPageProducts = () => {
   }
 
   function createRequest (typeId: number) {
-    return axios.get(`${url}/products?typeId=${typeId}&count=3`)
+    return axios.get(`${url}/products?typeId=${typeId}&count=3`);
   }
 
   const [pizzas, pizzasLoading, pizzasError]: any = useRequest(getPizzas);
@@ -45,32 +45,32 @@ export const useGetMainPageProducts = () => {
   const [soupes, soupesLoading, soupesError]: any = useRequest(getSoupes);
 
   const pizzaObj = {
-    pizzas, pizzasLoading, pizzasError
-  }
+    pizzas, pizzasLoading, pizzasError,
+  };
 
   const sushiObj = {
-    sushi, sushiLoading, sushiError
-  }
+    sushi, sushiLoading, sushiError,
+  };
 
   const shaurmaObj = {
-    shaurma, shaurmaLoading, shaurmaError
-  }
+    shaurma, shaurmaLoading, shaurmaError,
+  };
 
   const saladsObj = {
-    salads, saladsLoading, saladsError
-  }
+    salads, saladsLoading, saladsError,
+  };
 
   const mangalObj = {
-    mangal, mangalLoading, mangalError
-  }
+    mangal, mangalLoading, mangalError,
+  };
 
   const snacksObj = {
-    snacks, snacksLoading, snacksError
-  }
+    snacks, snacksLoading, snacksError,
+  };
 
   const soupesObj = {
-    soupes, soupesLoading, soupesError
-  }
+    soupes, soupesLoading, soupesError,
+  };
 
   return { pizzaObj, sushiObj, shaurmaObj, saladsObj, mangalObj, snacksObj, soupesObj };
-}
+};

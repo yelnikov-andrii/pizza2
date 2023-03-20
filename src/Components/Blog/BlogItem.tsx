@@ -20,10 +20,10 @@ export const BlogItem: React.FC <Props> = ({ blog }) => {
           alt="" 
           className="blogItem__img"
         />
-      <p className="blogItem__description">
-        {blog.article}
-      </p>
+        <p className="blogItem__description">
+          {blog.article}
+        </p>
       </div>
     </div>
-  )
-}
+  );
+};

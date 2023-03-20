@@ -7,7 +7,13 @@ import axios from 'axios';
 import { Loading } from '../UI/Loading/Loading';
 import { Product } from './Product/Product';
 
-export const Products: React.FC <any> = ({typeId, productCategories, name}) => {
+interface Props {
+  typeId: number;
+  productCategories: string[];
+  name: string;
+}
+
+export const Products: React.FC <Props> = ({ typeId, productCategories, name }) => {
   const [products, loading , error]: any = useRequest(getProducts);
   const [filterType, setFilterType] = React.useState('Усі');
   let filteredProducts = products;
@@ -15,7 +21,7 @@ export const Products: React.FC <any> = ({typeId, productCategories, name}) => {
   function getProducts() {
     return axios.get(`${url}/products?typeId=${typeId}`, {
       withCredentials: true,
-    } as any)
+    } as any);
   }
 
   if (filterType !== 'Усі') {
@@ -27,7 +33,7 @@ export const Products: React.FC <any> = ({typeId, productCategories, name}) => {
       <Container className='main'>
         <h1>Продукти не вдалося завнтажити. Помилка: {error}</h1>
       </Container>
-    )
+    );
   }
 
   return (
@@ -42,23 +48,23 @@ export const Products: React.FC <any> = ({typeId, productCategories, name}) => {
           <Loading />
         </Container>
       ) : (
-          <>
-            <Container>
-              <TypeList 
-                filterType={filterType} 
-                setFilterType={setFilterType} 
-                types={productCategories} 
+        <>
+          <Container>
+            <TypeList 
+              filterType={filterType} 
+              setFilterType={setFilterType} 
+              types={productCategories} 
+            />
+          </Container>
+          <Container className='products'>
+            {filteredProducts && filteredProducts.map((product: any) => (
+              <Product 
+                product={product} 
+                key={product.id}
               />
-            </Container>
-            <Container className='products'>
-              {filteredProducts && filteredProducts.map((product: any) => (
-                <Product 
-                  product={product} 
-                  key={product.id}
-                />
-              ))}
-            </Container>
-          </>
+            ))}
+          </Container>
+        </>
       )}
     </>
   );

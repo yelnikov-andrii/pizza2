@@ -6,10 +6,10 @@ import { Oval } from  'react-loader-spinner';
 export const LoadingCard = () => {
   return (
     <Container className='pizzaCard'>
-    <h1>
-      Loading...
-    </h1>
-    <Oval
+      <h1>
+        Loading...
+      </h1>
+      <Oval
         height={40}
         width={40}
         color="#4fa94d"
@@ -39,7 +39,7 @@ export const LoadingCard = () => {
           <rect x="950" y="420" rx="0" ry="0" width="200" height="57" />
         </ContentLoader>
       </div>
-  </Container>
+    </Container>
   );
 };
 

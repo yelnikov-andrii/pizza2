@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState} from 'react';
 
 export function useRequest(request: any) {
   const [loading, setLoading] = useState(false);
@@ -9,15 +9,14 @@ export function useRequest(request: any) {
     setLoading(true);
     request()
       .then((res: any) => {
-        setData(res.data)
+        setData(res.data);
       })
       .catch((e: any) => {
         setError(e.response.data.message);
-        console.log(e)
       })
       .finally(() => {
         setLoading(false);
-      })
+      });
   }, []);
 
   return [data, loading, error];

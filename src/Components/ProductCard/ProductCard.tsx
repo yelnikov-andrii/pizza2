@@ -24,7 +24,7 @@ export const ProductCard = () => {
   const { show, showAlert } = useAlert();
 
   function getProduct() {
-    return axios.get(`${url}/products/${id}`)
+    return axios.get(`${url}/products/${id}`);
   }
 
   if (error) {
@@ -32,13 +32,13 @@ export const ProductCard = () => {
       <Container className='productCard'>
         <h1>Продукт не вдалося завнтажити. Помилка: {error}</h1>
       </Container>
-    )
+    );
   }
 
   if (loading === true) {
     return (
       <LoadingCard />
-    )
+    );
   }
 
   return (
@@ -54,49 +54,49 @@ export const ProductCard = () => {
         <Col 
           md={{ span: 5, offset: 1 }}
         >
-        {product && (
-          <Card>
-            <Card.Body>
-              <ProductCardMainInfo 
-                product={product}
-              />
-              <ProductCardSizes
-                product={product}
-                selectedSize={selectedSize}
-                setSelectedSize={setSelectedSize}
-              />
-              <ProductCardSouses 
-                product={product}
-                selectedSouse={selectedSouse}
-                setSelectedSouse={setSelectedSouse}
-              />
-              <ProductCardWeightAndCount product={product} />
-            {product.price && (
-              <Card.Text >
-                <strong className='productCard__price'>
-                  {`${product.price} грн.`}
-                </strong>
-              </Card.Text>
-            )}
-            {product.prices && (
-              <Card.Text >
-                <strong className='productCard__price'>
-                  {`${product.prices[selectedSize]} грн.`}
-                </strong>
-              </Card.Text>
-            )}
-            <ProductCardCounter
-              product={product}
-              selectedSize={selectedSize}
-              selectedSouse={selectedSouse}
-              showAlert={showAlert}
-            />
-            <Alert className='pizza__alert' show={show}>
-              Товар доданий до кошику
-            </Alert>
-            </Card.Body>
-          </Card>
-        )}
+          {product && (
+            <Card>
+              <Card.Body>
+                <ProductCardMainInfo 
+                  product={product}
+                />
+                <ProductCardSizes
+                  product={product}
+                  selectedSize={selectedSize}
+                  setSelectedSize={setSelectedSize}
+                />
+                <ProductCardSouses 
+                  product={product}
+                  selectedSouse={selectedSouse}
+                  setSelectedSouse={setSelectedSouse}
+                />
+                <ProductCardWeightAndCount product={product} />
+                {product.price && (
+                  <Card.Text >
+                    <strong className='productCard__price'>
+                      {`${product.price} грн.`}
+                    </strong>
+                  </Card.Text>
+                )}
+                {product.prices && (
+                  <Card.Text >
+                    <strong className='productCard__price'>
+                      {`${product.prices[selectedSize]} грн.`}
+                    </strong>
+                  </Card.Text>
+                )}
+                <ProductCardCounter
+                  product={product}
+                  selectedSize={selectedSize}
+                  selectedSouse={selectedSouse}
+                  showAlert={showAlert}
+                />
+                <Alert className='pizza__alert' show={show}>
+                  Товар доданий до кошику
+                </Alert>
+              </Card.Body>
+            </Card>
+          )}
         </Col>
       </Row>
     </Container>

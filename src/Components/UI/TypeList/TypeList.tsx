@@ -8,19 +8,18 @@ export const TypeList: React.FC <any> = ({setFilterType, filterType, types}) => 
       className='typeList'
     >
       {types.map((type: any) => (
-          <ListGroup.Item 
-            action
-            key={type}
-            variant='info'
-            onClick={() => {
-              setFilterType(type)
-            }}
-            active={filterType === type ? true : false}
-          >
-            {type}
-          </ListGroup.Item>
+        <ListGroup.Item 
+          action
+          key={type}
+          variant='info'
+          onClick={() => {
+            setFilterType(type);
+          }}
+          active={filterType === type ? true : false}
+        >
+          {type}
+        </ListGroup.Item>
       ))}
     </ListGroup>
   );
-}
-
+};

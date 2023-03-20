@@ -3,7 +3,7 @@ import React from 'react';
 export const useAlert = () => {
   const [show, setShow] = React.useState(false);
 
-  let timerId: any = React.useRef();
+  const timerId: any = React.useRef();
 
   function showAlert() {
     if (show === true) {
@@ -17,9 +17,9 @@ export const useAlert = () => {
 
     setShow(true);
     timerId.current = setTimeout(() => {
-      setShow(false)
+      setShow(false);
     }, 2000);
   }
 
   return { show, showAlert};
-}
+};

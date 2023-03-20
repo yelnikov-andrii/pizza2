@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 export const productsSlice: any = createSlice({
   name: 'products',
@@ -10,11 +10,15 @@ export const productsSlice: any = createSlice({
       state.products = action.payload;
     },
     addProduct: (state, action: any) => {
-      state.products.push(action.payload)
+      state.products.push(action.payload);
     },
     increment: (state, action: any) => {
       const foundProduct = state.products.find((el: any) => el.id === action.payload);
       foundProduct.quantity += 1;
+    },
+    decrement: (state, action: any) => {
+      const foundProduct = state.products.find((el: any) => el.id === action.payload);
+      foundProduct.quantity -= 1;
     },
     incrementWithValue: (state, action: any) => {
       const foundProduct = state.products.find((el: any) => el.id === action.payload.id);
@@ -25,10 +29,11 @@ export const productsSlice: any = createSlice({
     },
     clearCart: (state) => {
       state.products = [];
-    }
-  }
-})
+    },
+  },
+});
 
-export const { addProduct, increment, removeProduct, getProducts, incrementWithValue, clearCart } = productsSlice.actions
+export const { addProduct, increment, decrement, removeProduct, getProducts, incrementWithValue, clearCart } 
+= productsSlice.actions;
 
-export default productsSlice.reducer
+export default productsSlice.reducer;

@@ -1,7 +1,7 @@
-import axios from "axios"
-import { useDispatch } from "react-redux"
-import { url } from "../.."
-import { setUser } from "../../../redux/authSlice";
+import { url } from '../..';
+import { setUser } from '../../../redux/authSlice';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 export const useCheckAuth = () => {
   const dispatch = useDispatch();
@@ -9,14 +9,11 @@ export const useCheckAuth = () => {
     return axios.get(`${url}/refresh`, {
       withCredentials: true,
     })
-    .then(response => {
-      localStorage.setItem('accessToken', response.data.accessToken);
-      dispatch(setUser(response.data.user));
-    })
-    .catch((e) => {
-      console.log(e);
-    })
+      .then(response => {
+        localStorage.setItem('accessToken', response.data.accessToken);
+        dispatch(setUser(response.data.user));
+      });
   };
 
-  return { refresh }
-}
+  return { refresh };
+};

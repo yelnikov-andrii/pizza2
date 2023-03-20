@@ -5,11 +5,8 @@ export const useSendData = () => {
     axios.post(url, dataObj)
       .then(response => {
         additionalFunction(response);
-      })
-      .catch((e) => {
-        console.log(e);
-      })
+      });
   }
 
   return { sendData };
-}
+};
