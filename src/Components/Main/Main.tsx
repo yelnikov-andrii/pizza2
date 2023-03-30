@@ -3,11 +3,17 @@ import { Container } from 'react-bootstrap';
 import { categoriesArr } from '../../utils/data';
 import { MainProduct } from './MainProduct';
 import Categories from './Categories';
-import { useGetMainPageProducts } from '../../hooks/useGetMainPageProducts';
 import { Product } from '../Products/Product/Product';
+import { useProductsByCategory  } from '../../hooks/useProductsByCategory';
 
 export const Main = () => {
-  const { pizzaObj, sushiObj, shaurmaObj, saladsObj, snacksObj, soupesObj, mangalObj } = useGetMainPageProducts();
+  const [pizzas, pizzasLoading, pizzasError] = useProductsByCategory(1);
+  const [sushi, sushiLoading, sushiError] = useProductsByCategory(2);
+  const [shaurma, shaurmaLoading, shaurmaError] = useProductsByCategory(3);
+  const [salads, saladsLoading, saladsError] = useProductsByCategory(4);
+  const [mangal, mangalLoading, mangalError] = useProductsByCategory(5);
+  const [snacks, snacksLoading, snacksError] = useProductsByCategory(6);
+  const [soupes, soupesLoading, soupesError] = useProductsByCategory(7);
 
   return (
     <Container 
@@ -18,10 +24,10 @@ export const Main = () => {
       <MainProduct 
         categoryName="Піца" 
         categoryLink="pizzas" 
-        loading={pizzaObj.pizzasLoading} 
-        error={pizzaObj.pizzasError}
+        loading={pizzasLoading} 
+        error={pizzasError}
       >
-        {pizzaObj.pizzas && pizzaObj.pizzas.map((pizza: any) => (
+        {pizzas && pizzas.map((pizza: any) => (
           <Product 
             product={pizza} 
             key={pizza.id}
@@ -32,10 +38,10 @@ export const Main = () => {
       <MainProduct 
         categoryName="Суші" 
         categoryLink="sushi" 
-        loading={sushiObj.sushiLoading} 
-        error={sushiObj.sushiError}
+        loading={sushiLoading} 
+        error={sushiError}
       >
-        {sushiObj.sushi && sushiObj.sushi.map((sushiItem: any) => (
+        {sushi && sushi.map((sushiItem: any) => (
           <Product 
             product={sushiItem} 
             key={sushiItem.id}
@@ -46,10 +52,10 @@ export const Main = () => {
       <MainProduct 
         categoryName="Шаурма" 
         categoryLink="shaurma" 
-        loading={shaurmaObj.shaurmaLoading} 
-        error={shaurmaObj.shaurmaError}
+        loading={shaurmaLoading} 
+        error={shaurmaError}
       >
-        {shaurmaObj.shaurma && shaurmaObj.shaurma.map((shaurmaItem: any) => (
+        {shaurma && shaurma.map((shaurmaItem: any) => (
           <Product 
             product={shaurmaItem} 
             key={shaurmaItem.id}
@@ -60,10 +66,10 @@ export const Main = () => {
       <MainProduct 
         categoryName="Салати"
         categoryLink="salads" 
-        loading={saladsObj.saladsLoading} 
-        error={saladsObj.saladsError}
+        loading={saladsLoading} 
+        error={saladsError}
       >
-        {saladsObj.salads && saladsObj.salads.map((salad: any) => (
+        {salads && salads.map((salad: any) => (
           <Product 
             product={salad} 
             key={salad.id}
@@ -74,10 +80,10 @@ export const Main = () => {
       <MainProduct 
         categoryName="Закуски"
         categoryLink="snacks" 
-        loading={snacksObj.snacksLoading} 
-        error={snacksObj.snacksError}
+        loading={snacksLoading} 
+        error={snacksError}
       >
-        {snacksObj.snacks && snacksObj.snacks.map((snack: any) => (
+        {snacks && snacks.map((snack: any) => (
           <Product 
             product={snack} 
             key={snack.id}
@@ -88,10 +94,10 @@ export const Main = () => {
       <MainProduct 
         categoryName="Мангал"
         categoryLink="mangal" 
-        loading={mangalObj.mangalLoading} 
-        error={mangalObj.mangalError}
+        loading={mangalLoading} 
+        error={mangalError}
       >
-        {mangalObj.mangal && mangalObj.mangal.map((mangalItem: any) => (
+        {mangal && mangal.map((mangalItem: any) => (
           <Product 
             product={mangalItem} 
             key={mangalItem.id}
@@ -102,10 +108,10 @@ export const Main = () => {
       <MainProduct 
         categoryName="Супи"
         categoryLink="soupes" 
-        loading={soupesObj.soupesLoading} 
-        error={soupesObj.soupesError}
+        loading={soupesLoading} 
+        error={soupesError}
       >
-        {soupesObj.soupes && soupesObj.soupes.map((soupe: any) => (
+        {soupes && soupes.map((soupe: any) => (
           <Product 
             product={soupe} 
             key={soupe.id}
