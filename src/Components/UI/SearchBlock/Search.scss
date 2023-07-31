@@ -1,0 +1,20 @@
+@import './Select.scss';
+
+.search {
+  display: flex;
+  margin: 0 0 20px 0;
+  justify-content: space-between;
+
+  &__input {
+    width: 50%;
+    height: 40px;
+    border: 1px solid #055160;
+    color: #055160;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  &__select {
+    position: relative;
+  }
+}
