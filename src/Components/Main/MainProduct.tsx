@@ -1,17 +1,15 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Loading } from '../UI/Loading/Loading';
 
 interface Props {
   categoryName: string;
   categoryLink: string;
-  loading: boolean;
   error: string;
   children: any
 }
 
-export const MainProduct: React.FC <Props> = ({categoryName, categoryLink, loading, error, children}) => {
+export const MainProduct: React.FC <Props> = ({categoryName, categoryLink, error, children}) => {
 
   if (error) {
     return (
@@ -23,23 +21,13 @@ export const MainProduct: React.FC <Props> = ({categoryName, categoryLink, loadi
 
   return (
     <Container className='mainProduct'>
-      <Container>
-        {loading ? (
-          <Container>
-            <Loading />
-          </Container>
-        ) :  (
-          <>
-            <LinkContainer to={categoryLink}>
-              <h2 className='main__header'>
-                {categoryName}
-              </h2>
-            </LinkContainer>
-            <Container className='products'>
-              {children}
-            </Container>
-          </>
-        )}
+      <LinkContainer to={categoryLink}>
+        <h2 className='main__header'>
+          {categoryName}
+        </h2>
+      </LinkContainer>
+      <Container className='products'>
+        {children}
       </Container>
     </Container>
   );
