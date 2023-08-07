@@ -1,0 +1,15 @@
+.up-button {
+  position: fixed;
+  bottom: 100px;
+  right: 50px;
+  z-index: 5;
+
+  &__button {
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    background: gray;
+    width: 30px;
+    height: 30px;
+  }
+}

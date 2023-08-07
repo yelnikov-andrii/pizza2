@@ -15,17 +15,20 @@ import { ProductCardSouses } from './ProductCardSouses';
 import { ProductCardWeightAndCount } from './ProductCardWeightAndCount';
 import { ProductCardCounter } from './ProductCardCounter';
 import { url } from '../../API/index';
+import { useScrollTop } from '../../hooks/useScrollTop';
 
 export const ProductCard = () => {
   const { id } = useParams();
-  const [product, loading, error]: any = useRequest(getProduct);
   const [selectedSize, setSelectedSize] = React.useState(0);
   const [selectedSouse, setSelectedSouse] = React.useState(0);
   const { show, showAlert } = useAlert();
+  useScrollTop();
 
-  function getProduct() {
+  const getProduct = React.useCallback(() => {
     return axios.get(`${url}/products/${id}`);
-  }
+  }, [id]);
+
+  const [product, loading, error]: any = useRequest(getProduct);
 
   if (error) {
     return (

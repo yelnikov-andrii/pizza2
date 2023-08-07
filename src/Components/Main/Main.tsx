@@ -7,8 +7,11 @@ import Categories from './Categories';
 import { Product } from '../Products/Product/Product';
 import { useProductsByCategory  } from '../../hooks/useProductsByCategory';
 import { Loading } from '../UI/Loading/Loading';
+import { useScrollTop } from '../../hooks/useScrollTop';
+import { UpButton } from '../UI/UpButton/UpButton';
 
 export const Main = () => {
+  useScrollTop();
   const [pizzas, pizzasLoading, pizzasError] = useProductsByCategory(1);
   const [sushi, sushiLoading, sushiError] = useProductsByCategory(2);
   const [shaurma, shaurmaLoading, shaurmaError] = useProductsByCategory(3);
@@ -120,6 +123,7 @@ export const Main = () => {
               />
             ))}
           </MainProduct>
+          <UpButton />
         </>
       )}
       

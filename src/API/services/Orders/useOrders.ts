@@ -21,7 +21,6 @@ export const useOrders = () => {
       headers:{
         Authorization: `Bearer ${accessToken}`,
       },
-      withCredentials: true,
     })
       .then(response => {
         setOrders(response.data);

@@ -17,9 +17,7 @@ export const useLogin = ({email, password}: UserAuth) => {
     setEmailErrorRequest('');
     setPasswordErrorRequest('');
     setError('');
-    axios.post(`${url}/login`, {email, password}, {
-      withCredentials: true,
-    })
+    axios.post(`${url}/login`, {email, password})
       .then(response => {
         dispatch(setUser(response.data.user));
         localStorage.setItem('accessToken', response.data.accessToken);

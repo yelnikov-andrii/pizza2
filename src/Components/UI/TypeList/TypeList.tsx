@@ -1,7 +1,7 @@
 import React from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-export const TypeList: React.FC <any> = ({setFilterType, filterType, types}) => {
+export const TypeList: React.FC <any> = ({ setFilterType, filterType, types, setPage }) => {
   return (
     <ListGroup 
       horizontal
@@ -14,6 +14,7 @@ export const TypeList: React.FC <any> = ({setFilterType, filterType, types}) => 
           variant='info'
           onClick={() => {
             setFilterType(type);
+            setPage(1);
           }}
           active={filterType === type ? true : false}
         >

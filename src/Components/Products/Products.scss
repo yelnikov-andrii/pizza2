@@ -4,10 +4,13 @@
   display: flex;
   gap: calc(10% / 2);
   flex-wrap: wrap;
-  justify-content: space-around;
 
   &__notfound {
     width: 50%;
     margin: 0 0 20px 0;
+  }
+
+  &__count {
+    margin: 0 0 10px 0;
   }
 }

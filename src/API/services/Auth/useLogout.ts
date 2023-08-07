@@ -6,9 +6,7 @@ import { useDispatch } from 'react-redux';
 export const useLogout = () => {
   const dispatch = useDispatch();
   function logout() {
-    axios.get(`${url}/logout`, {
-      withCredentials: true,
-    });
+    axios.get(`${url}/logout`);
     dispatch(setUser(null));
     localStorage.setItem('accessToken', '');
   }

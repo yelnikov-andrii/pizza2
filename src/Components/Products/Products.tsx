@@ -7,6 +7,10 @@ import axios from 'axios';
 import { Loading } from '../UI/Loading/Loading';
 import { Product } from './Product/Product';
 import { Search } from '../UI/SearchBlock/Search';
+import { useScrollTop } from '../../hooks/useScrollTop';
+import { UpButton } from '../UI/UpButton/UpButton';
+import { LoadMore } from '../UI/LoadMore/LoadMore';
+import { Loader } from '../UI/Loader/Loader';
 
 interface Props {
   typeId: number;
@@ -15,7 +19,8 @@ interface Props {
 }
 
 export const Products: React.FC <Props> = ({ typeId, productCategories, name }) => {
-  const [products, loading , error]: any = useRequest(getProducts);
+  useScrollTop();
+  
   const [filterType, setFilterType] = React.useState('Усі');
   const [searchInput, setSearchInput] = React.useState('');
   const [selectedOption, setSelectedOption] = React.useState('');
@@ -25,31 +30,62 @@ export const Products: React.FC <Props> = ({ typeId, productCategories, name }) 
     'За ціною від меншої до більшої',
     'За ціною від більшої до меншої',
   ];
-  let filteredProducts = products;
+  const [page, setPage] = React.useState(1);
+  const [appliedInput, setAppliedInput] = React.useState('');
+  let timer: NodeJS.Timeout | null = null;
 
-  function getProducts() {
-    return axios.get(`${url}/products?typeId=${typeId}`, {
-      withCredentials: true,
-    } as any);
-  };
+  React.useEffect(() => {
+    const delay = 1000;
 
-  if (filterType !== 'Усі') {
-    filteredProducts = products.filter((product: any) => product.categories.includes(filterType));
-  }
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    timer = setTimeout(() => {
+      setAppliedInput(searchInput);
+    }, delay);
+
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+  }, [searchInput]);
+
+  const getProducts = React.useCallback(() => {
+    if (filterType === 'Усі') {
+      if (appliedInput) {
+        return axios.get(`${url}/products?typeId=${typeId}`);
+      }
+
+      return axios.get(`${url}/products?typeId=${typeId}&limit=9&page=${page}` as any);
+    } else {
+
+      if (appliedInput) {
+        return axios.get(`${url}/products?typeId=${typeId}&category=${filterType}`);
+      }
+
+      return axios.get(`${url}/products?typeId=${typeId}&category=${filterType}&limit=9&page=${page}`);
+    }
+  }, [filterType, page, appliedInput]);
+
+  const [products, loading , error, totalCount, currentPage]: any = useRequest(getProducts);
+  const filteredProducts = products;
+  const countOfPages = Math.ceil(totalCount / 9);
 
   const searchedProducts = React.useMemo(() => {
     if (!filteredProducts) {
       return [];
     }
 
-    if (searchInput) {
+    if (appliedInput) {
       return filteredProducts.filter((product: any) => 
-        product.name.toLowerCase().includes(searchInput.toLowerCase()) 
-        || searchInput.toLowerCase().includes(product.name.toLowerCase()));
+        product.name.toLowerCase().includes(appliedInput.toLowerCase()) 
+        || appliedInput.toLowerCase().includes(product.name.toLowerCase()));
     } else {
       return filteredProducts;
     }
-  }, [searchInput, filteredProducts]);
+  }, [appliedInput, filteredProducts]);
 
   const sortedProducts = React.useMemo(() => {
     switch(selectedOption) {
@@ -86,6 +122,10 @@ export const Products: React.FC <Props> = ({ typeId, productCategories, name }) 
     );
   }
 
+  function loadmore() {
+    setPage(prev => prev + 1);
+  }
+
   return (
     <>
       <Container>
@@ -93,7 +133,7 @@ export const Products: React.FC <Props> = ({ typeId, productCategories, name }) 
           {name}
         </h1>
       </Container>
-      {loading ? (
+      {loading && page === 1 ? (
         <Container>
           <Loading />
         </Container>
@@ -112,8 +152,14 @@ export const Products: React.FC <Props> = ({ typeId, productCategories, name }) 
             <TypeList 
               filterType={filterType} 
               setFilterType={setFilterType} 
-              types={productCategories} 
+              types={productCategories}
+              setPage={setPage}
             />
+            {sortedProducts.length !== 0 && (
+              <h4 className='products__count'>
+                Кількість продуктів: {appliedInput ? searchedProducts.length : totalCount}
+              </h4>
+            )}
           </Container>
           <Container className='products'>
             {sortedProducts.length === 0 ? (
@@ -129,6 +175,19 @@ export const Products: React.FC <Props> = ({ typeId, productCategories, name }) 
                   key={product.id}
                 />
               ))
+            )}
+            <UpButton />
+          </Container>
+          <Container>
+            {page !== 1 && loading ? (
+              <Loader />
+            ) : (
+              (currentPage ? (+currentPage !== countOfPages) : (1 !== countOfPages)) && (!searchInput) 
+              && (
+                <LoadMore 
+                  loadmore={loadmore}
+                />
+              )
             )}
           </Container>
         </>
