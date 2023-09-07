@@ -12,7 +12,7 @@ export const UpButton = () => {
         }}
         className='up-button__button'
       >
-        Нагору &#11165;
+        &#11165;
       </button>
     </div>
   );
