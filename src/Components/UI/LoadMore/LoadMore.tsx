@@ -8,7 +8,7 @@ export const LoadMore: React.FC <any> = ({ loadmore }) => {
         loadmore();
       }}
     >
-      Load more
+      Завантажити ще
     </button>
   );
 };
