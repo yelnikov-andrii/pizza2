@@ -196,6 +196,7 @@ export const navLinks = [
     url: '/contacts',
   },
 ];
+
 export const phones = ['+3809312345678',
   '+3806712345678',
   '+3809912345678'];
