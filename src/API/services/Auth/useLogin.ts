@@ -17,7 +17,7 @@ export const useLogin = ({email, password}: UserAuth) => {
     setEmailErrorRequest('');
     setPasswordErrorRequest('');
     setError('');
-    // axios.defaults.withCredentials = true;
+    axios.defaults.withCredentials = true;
     axios.post(`${url}/login`, {email, password})
       .then(response => {
         dispatch(setUser(response.data.user));

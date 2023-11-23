@@ -13,6 +13,7 @@ export const useActivate = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
+    axios.defaults.withCredentials = true;
     setChecking(true);
     axios.get(`${url}/activation/${activationToken}`)
       .then(response => {

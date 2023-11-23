@@ -8,6 +8,7 @@ export const useRegister = (onSuccess: () => void) => {
   const [error, setError] = React.useState('');
 
   function register({email, password}: UserAuth) {
+    axios.defaults.withCredentials = true;
     axios.post(`${url}/registration`, {email, password})
       .then(response => {
         onSuccess();

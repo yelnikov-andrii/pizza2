@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 
 export const useCheckAuth = () => {
   const dispatch = useDispatch();
+  axios.defaults.withCredentials = true;
   async function refresh() {
     return axios.get(`${url}/refresh`)
       .then(response => {
